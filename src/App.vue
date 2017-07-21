@@ -1,25 +1,29 @@
 <template>
     <div id="app">
         <header>
-            <router-link :to="{ name: 'home' }">
-                <img src="/public/logo.png" :class="$style.logo">
-            </router-link>
-            <div :class="$style.title">{{title}}</div>
+            <nav :class="$style.nav">
+              <ul>
+                <li><router-link :to="{ name: 'home' }" v-html="icons.home"></router-link></li>
+              </ul>
+              <ul>
+                <li><a href="/keystone" v-html="icons.dashboard"></a></li>
+              </ul>
+            </nav>
         </header>
-        <main>
-            <router-view></router-view>
-        </main>
+        <main><router-view></router-view></main>
     </div>
 </template>
 
 <script>
   const config = require('../config');
+  import icons from './lib/icons';
 
   export default {
     name: 'app',
     data () {
       return {
-        title: config.template.title
+        title: config.template.title,
+        icons: icons
       }
     }
   }
@@ -30,8 +34,43 @@
 </style>
 
 <style module>
-    @value xxl as t-xxl from './css/typography.css';
-    .title {  @mixin font t-xxl; }
-    .logo {  max-width: 320px;  width: 100%;  }
+@value blue from './css/colors.css';
+@value normal as m-normal from './css/layout.css';
+
+.nav {
+  background: blue;
+  display: flex;
+  justify-content: space-between;
+
+  & ul {
+    display: flex;
+  }
+
+  & li {
+    position: relative;
+  }
+
+  & li::before {
+    transform: translate(0, -50%); 
+    background-color: rgba(255,255,255,0.2);
+    content: " ";
+    left: 0;
+    height: 1em;
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    z-index: 1;
+  }
+
+  & li:first-child::before {
+    display: none
+  }
+
+  & a {
+    color: #fff;
+    display: inline-block;
+    padding: m-normal;
+  }
+}
 </style>
 

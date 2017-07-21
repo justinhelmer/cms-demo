@@ -1,35 +1,32 @@
-@value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
-@value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
-@custom-media --viewport-small (width <= 30rem);
-@custom-selector :--heading h1, h2, h3, h4, h5, h6;
-
-:root {
-  --centered: {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  };
-}
+@import '../../../node_modules/octicons/build/octicons.css';
 
 :root {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  @mixin font t-normal;
+  font-size: 14px; /* sets rem base */
 }
 
-body {  margin: m-large;  }
+@value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
+@value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
+@value white from './css/colors.css';
+
+@custom-media --viewport-small (width <= 30rem);
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {  background: white; margin: 0;  }
 main {  margin: m-normal;  }
-header {
-  @apply --centered;
-  flex-direction: column;
-  border-bottom: 2px solid black;
-}
-#app {
-  margin: 0 auto;
-  max-width: 960px;
-  width: 100%;
-}
 
 :--heading {  font-weight: normal;  margin: m-small 0;  }
-h1 {  @mixin font t-xl;  }
+
+h1 {
+  @mixin font t-xl;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  margin: m-large 0;
+  padding-bottom: 1rem;
+}
+
 h2 {  @mixin font t-large; }
 ul {  list-style-type: none;  margin: 0;  padding: 0;  }

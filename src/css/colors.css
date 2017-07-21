@@ -1,7 +1,2 @@
-@value primary: red;
-@value secondary: green;
-@value tertiary: blue;
-
-.color-primary {  color: primary;  }
-.color-secondary {  color: secondary;  }
-.color-tertiary {  color: tertiary;  }
+@value blue: #1385e5;
+@value white: #fafafa;

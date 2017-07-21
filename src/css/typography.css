@@ -1,7 +1,7 @@
 @value base: 1rem;
 
 @value small: calc(base * 0.75);
-@value normal: base;
+@value normal: calc(base);
 @value large: calc(base * 1.5);
 @value xl: calc(base * 2);
 @value xxl: calc(base * 3);
