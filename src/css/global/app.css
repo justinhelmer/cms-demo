@@ -3,11 +3,12 @@
 :root {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-size: 14px; /* sets rem base */
+  line-height: 1.4;
 }
 
 @value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
 @value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
-@value white from './css/colors.css';
+@value blue, white from './css/colors.css';
 
 @custom-media --viewport-small (width <= 30rem);
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
@@ -22,11 +23,12 @@ main {  margin: m-normal;  }
 :--heading {  font-weight: normal;  margin: m-small 0;  }
 
 h1 {
-  @mixin font t-xl;
+  font-size: t-xl;
   border-bottom: 2px solid rgba(0,0,0,0.1);
   margin: m-large 0;
   padding-bottom: 1rem;
 }
 
-h2 {  @mixin font t-large; }
+h2 {  font-size: t-large; }
 ul {  list-style-type: none;  margin: 0;  padding: 0;  }
+a { color: blue; text-decoration: none; }

@@ -15,16 +15,12 @@
 </template>
 
 <script>
-  const config = require('../config');
   import icons from './lib/icons';
 
   export default {
     name: 'app',
     data () {
-      return {
-        title: config.template.title,
-        icons: icons
-      }
+      return {icons};
     }
   }
 </script>
@@ -35,7 +31,7 @@
 
 <style module>
 @value blue from './css/colors.css';
-@value normal as m-normal from './css/layout.css';
+@value normal as p-normal from './css/layout.css';
 
 .nav {
   background: blue;
@@ -69,7 +65,7 @@
   & a {
     color: #fff;
     display: inline-block;
-    padding: m-normal;
+    padding: p-normal;
   }
 }
 </style>

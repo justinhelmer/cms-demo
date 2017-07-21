@@ -3,7 +3,7 @@ const octicons = require('octicons');
 const icons = ['dashboard', 'home'];
 let svgs = {};
 
-icons.forEach(icon => {
+Object.keys(octicons).forEach(icon => {
   svgs[icon] = octicons[icon].toSVG();
 });
 

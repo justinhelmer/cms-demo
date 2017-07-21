@@ -1,5 +1,4 @@
 import axios from 'axios';
-import config from '../../config';
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -8,11 +7,12 @@ Vue.use(Vuex);
 export function createStore () {
   return new Vuex.Store({
     state: {
-      users: []
+      photos: [],
+      videos: []
     },
     actions: {
       fetch({commit}, {endpoint, store, id}) {
-        const base = config.proxy.base || '/api';
+        const base = '/api';
 
         let uri = 'http://localhost:3000' + base + '/' + endpoint;
 

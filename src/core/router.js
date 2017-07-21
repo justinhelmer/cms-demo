@@ -24,9 +24,14 @@ export function createRouter () {
         component: () => import('../components/Home.vue')
       },
       {
-        name: 'users',
-        path: '/users',
-        component: () => import('../components/Users.vue')
+        name: 'photos',
+        path: '/photos',
+        component: () => import('../components/Photos.vue')
+      },
+      {
+        name: 'videos',
+        path: '/videos',
+        component: () => import('../components/Videos.vue')
       }
     ]
   });

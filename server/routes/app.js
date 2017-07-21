@@ -68,9 +68,10 @@ module.exports = app => {
 
     res.setHeader('Content-Type', 'text/html');
 
-    const context = Object.assign({}, config.template || {}, {
+    const context = {
+      title: config.title,
       url: req.url
-    });
+    };
 
     renderer.renderToString(context, (err, html) => {
       if (err) {
