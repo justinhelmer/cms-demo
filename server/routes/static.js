@@ -1,6 +1,7 @@
 const compression = require('compression');
 const express = require('express');
 const path = require('path');
+const config = require('../../config');
 
 const isProd = process.env.NODE_ENV === 'production';
 const serve = (relativePath, cache) => express.static(path.resolve(__dirname, relativePath), {
@@ -11,4 +12,10 @@ module.exports = app => {
   app.use(compression({ threshold: 0 }));
   app.use('/dist', serve('../../dist', true));
   app.use('/public', serve('../../public', true));
+
+  Object.keys(config.assetPaths).forEach(list => {
+    config.assetPaths[list].forEach(assetPath => {
+      app.use(assetPath, serve(assetPath, true));
+    });
+  });
 }
