@@ -32,7 +32,7 @@ export function createStore () {
       }
     },
     getters: {
-      getItemById: state => (id, store) => state[store].find(item => item.id === id)
+      getItemById: state => (id, store) => state[store].find(item => item._id === id)
     },
     mutations: {
       setItem (state, { store, id, data }) {
