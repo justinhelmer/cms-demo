@@ -1,3 +1,6 @@
 module.exports = {
-  title: 'CMS Demo'
+  title: 'CMS Demo',
+  assetPaths: {
+    video: ['/mnt/a/Server/Movies']
+  }
 };
