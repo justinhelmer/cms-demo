@@ -1,7 +1,7 @@
-var keystone = require('keystone'),
-    Types = keystone.Field.Types;
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
  
-var Video = new keystone.List('video');
+const Video = new keystone.List('video');
  
 Video.add({
   name: { type: Types.Text, initial: true, required: true, index: true },

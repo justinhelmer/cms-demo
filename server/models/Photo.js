@@ -1,7 +1,7 @@
-var keystone = require('keystone'),
-    Types = keystone.Field.Types;
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
  
-var Photo = new keystone.List('photo');
+const Photo = new keystone.List('photo');
  
 Photo.add({
   name: { type: Types.Text, initial: true, required: true, index: true },
