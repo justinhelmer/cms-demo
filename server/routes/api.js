@@ -10,7 +10,6 @@ module.exports = app => {
           console.error(err);
           res.status(500).send(err).end();
         } else {
-          console.log('ITEMS:', items);
           res.send(items).end();
         }
       });

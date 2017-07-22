@@ -1,7 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 const resolve = file => path.resolve(__dirname, file);
@@ -49,23 +48,17 @@ var config = {
     maxEntrypointSize: 300000,
     hints: isProd ? 'warning' : false
   },
-  // plugins: isProd
-  //   ? [
-  //     new webpack.optimize.UglifyJsPlugin({
-  //       compress: { warnings: false }
-  //     }),
+  plugins: isProd
+    ? [
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false }
+      }),
 
-  //     new ExtractTextPlugin({
-  //       filename: 'common.[chunkhash].css'
-  //     })
-  //   ]
-  //   : [
-  //     new FriendlyErrorsPlugin({
-  //       compilationSuccessInfo: {
-  //         messages: ['You application is running at http://localhost:3000'],
-  //       }
-  //     })
-  //   ]
+      new ExtractTextPlugin({
+        filename: 'common.[chunkhash].css'
+      })
+    ]
+    : []
 };
 
 module.exports = config;
