@@ -1,9 +1,9 @@
 <template>
     <div id="videos">
         <h1>videos</h1>
-        <ul :class="$style.list">
-            <li v-for="video in videos" :class="$style.list">
-              {{video.name}}
+        <ul>
+            <li v-for="video in videos">
+              <router-link :to="{ name: 'video', params: { id: video._id }}">{{video.name}}</router-link>
             </li>
         </ul>
     </div>
@@ -27,9 +27,3 @@
     }
   }
 </script>
-
-<style module>
-    .list {
-        display: flex;
-    }
-</style>
