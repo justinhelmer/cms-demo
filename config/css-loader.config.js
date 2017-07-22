@@ -10,8 +10,7 @@ const productionLoaders = [
     loader: 'css-loader',
     options: {
       importLoaders: 1,
-      modules: true,
-      camelCase: 'dashesOnly'
+      modules: true
     }
   },
   { loader: 'postcss-loader' }

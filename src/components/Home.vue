@@ -6,13 +6,13 @@
           <li>
             <router-link :to="{ name: 'videos' }" :class="$style.link">
               <div v-html="icons['device-camera-video']" :class="$style.icon"></div>
-              <div :class="$style.iconText">Videos</div>
+              <div :class="$style['icon-text']">Videos</div>
             </router-link>
           </li>
           <li>
             <router-link :to="{ name: 'photos' }" :class="$style.link">
               <div v-html="icons['device-camera']" :class="$style.icon"></div>
-              <div :class="$style.iconText">Photos</div>
+              <div :class="$style['icon-text']">Photos</div>
             </router-link>
           </li>
         </ul>
