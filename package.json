@@ -8,7 +8,8 @@
     "build": "rimraf dist && npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config config/webpack.client.config.js --progress --hide-modules",
     "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.server.config.js --progress --hide-modules",
-    "db": "mongod --dbpath=/data/db",
+    "db": "mongod --dbpath=/data/db >/dev/null",
+    "db:clean": "sudo rm -rf /data/db && sudo mkdir /data/db && sudo chmod -R 777 /data/db",
     "dev": "concurrently \"npm run db\" \"node server\"",
     "start": "cross-env NODE_ENV=production node server"
   },
