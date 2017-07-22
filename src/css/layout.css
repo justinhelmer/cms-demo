@@ -4,6 +4,8 @@
 @value normal: calc(base);
 @value large: calc(base * 2);
 
+@value max-width: 1100px;
+
 .margin-small { margin: small; }
 .margin-normal { margin: normal; }
 .margin-large { margin: large; }

@@ -18,7 +18,27 @@
 }
 
 body {  background: white; margin: 0;  }
-main {  margin: m-normal;  }
+
+#app {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+main {
+  margin: m-normal;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  & > div {
+    flex-grow: 1;
+  }
+}
 
 :--heading {  font-weight: normal;  margin: m-small 0;  }
 

@@ -1,7 +1,12 @@
 <template>
-    <div id="video">
+    <div id="video" :class="$style.wrapper">
         <h1>{{video.name}}</h1>
-        <h2>{{video.path}}</h2>
+
+        <div :class="$style.player">
+          <video controls>
+            <source :src="video.path" type="video/mp4">
+          </video>
+        </div>
     </div>
 </template>
 
@@ -26,6 +31,23 @@
 </script>
 
 <style module>
-    .list {
+    @value max-width from '../css/layout.css';
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .player {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-grow: 1;
+
+      & video {  
+        height: auto;
+        max-width: max-width;
+        width: 100%;
+      }
     }
 </style>
