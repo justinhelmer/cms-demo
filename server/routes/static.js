@@ -12,6 +12,7 @@ module.exports = app => {
   app.use(compression({ threshold: 0 }));
   app.use('/dist', serve('../../dist', true));
   app.use('/public', serve('../../public', true));
+  app.use(config.thumbsPath, serve(config.thumbsPath, true));
 
   Object.keys(config.assetPaths).forEach(list => {
     config.assetPaths[list].forEach(assetPath => {
