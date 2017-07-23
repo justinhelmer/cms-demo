@@ -64,8 +64,6 @@ module.exports = app => {
   });
 
   function render(req, res) {
-    const s = Date.now();
-
     res.setHeader('Content-Type', 'text/html');
 
     const context = {
@@ -85,10 +83,6 @@ module.exports = app => {
         console.error(err.stack || err);
       } else {
         res.end(html);
-
-        if (!isProd) {
-          console.log(`whole request: ${Date.now() - s}ms`);
-        }
       }
     });
   }
