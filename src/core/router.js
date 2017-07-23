@@ -30,12 +30,12 @@ export function createRouter () {
       },
       {
         name: 'videos',
-        path: '/videos',
+        path: '/videos/:page?',
         component: () => import('../components/Videos.vue')
       },
       {
         name: 'video',
-        path: '/videos/:id',
+        path: '/video/:id',
         component: () => import('../components/Video.vue')
       }
     ]

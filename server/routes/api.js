@@ -8,7 +8,10 @@ module.exports = app => {
     if (req.params.id) {
       query = List.model.findById(req.params.id);
     } else {
-      query = List.model.find();
+      query = List.paginate({
+        page: req.query.page || 1,
+        perPage: 100
+      });
     }
 
     query.exec((err, result) => {

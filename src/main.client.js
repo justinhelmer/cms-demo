@@ -56,15 +56,9 @@ let $spinner = $(`
 `);
 
 function fetchAsyncData(to, from, next) {
-  const matched = router.getMatchedComponents(to);
-  const prevMatched = router.getMatchedComponents(from);
-
-  let diffed = false;
-  const activated = matched.filter((c, i) => {
-    return diffed || (diffed = (prevMatched[i] !== c))
-  });
-
-  const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
+  const asyncDataHooks = router
+    .getMatchedComponents(to)
+    .map(component => component.asyncData).filter(_ => _);
 
   if (!asyncDataHooks.length) {
     return next();
@@ -72,7 +66,7 @@ function fetchAsyncData(to, from, next) {
 
   $spinner.appendTo('body');
 
-  Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
+  Promise.all(asyncDataHooks.map(asyncData => asyncData({ store, route: to })))
     .then(() => {
       $spinner.detach();
       next();

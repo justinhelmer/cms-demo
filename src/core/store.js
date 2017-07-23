@@ -7,12 +7,13 @@ Vue.use(Vuex);
 export function createStore () {
   return new Vuex.Store({
     state: {
-      photos: [],
-      videos: []
+      photos: {},
+      videos: {}
     },
     actions: {
-      fetch({commit}, {endpoint, store, id}) {
+      fetch({commit}, {endpoint, store, id, params}) {
         const base = '/api';
+        const options = { params };
 
         let uri = 'http://localhost:3000' + base + '/' + endpoint;
 
@@ -20,7 +21,7 @@ export function createStore () {
           uri += '/' + id;
         }
 
-        return axios.get(uri)
+        return axios.get(uri, options)
             .then(function ({data}) {
               if (id) {
                 commit('setItem', {store, id, data});
@@ -32,16 +33,16 @@ export function createStore () {
       }
     },
     getters: {
-      getItemById: state => (id, store) => state[store].find(item => item._id === id)
+      getItemById: state => (id, store) => state[store].results.find(item => item._id === id)
     },
     mutations: {
       setItem (state, { store, id, data }) {
-        const idx = state[store].find(item => item.id === id);
+        const idx = state[store].results.find(item => item.id === id);
 
         if (idx) {
-          state[store][idx] = data;
+          state[store].results[idx] = data;
         } else {
-          state[store].push(data);
+          state[store].results.push(data);
         }
       },
 
