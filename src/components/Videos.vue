@@ -24,12 +24,6 @@
 
     components: { thumbnail },
 
-    beforeRouteUpdate (to, from, next) {
-      console.log('TO', to);
-      console.log('FROM', from);
-      next();
-    },
-
     asyncData ({ store, route }) {
       return store.dispatch('fetch', {
         store: 'videos',

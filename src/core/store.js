@@ -15,7 +15,7 @@ export function createStore () {
         const base = '/api';
         const options = { params };
 
-        let uri = 'http://localhost:3000' + base + '/' + endpoint;
+        let uri = window.location.origin + base + '/' + endpoint;
 
         if (id) {
           uri += '/' + id;
