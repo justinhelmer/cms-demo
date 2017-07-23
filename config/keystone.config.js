@@ -11,5 +11,8 @@ module.exports = {
   'session': true,
   'auth': true,
   'user model': 'user',
-  'cookie secret': '24634sdfhsdfgh346y34'
+  'cookie secret': '24634sdfhsdfgh346y34',
+  'logger options': {
+    skip: (req, res) => res.statusCode < 400
+  } 
 };
