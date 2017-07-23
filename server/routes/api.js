@@ -11,12 +11,12 @@ module.exports = app => {
       query = List.model.find();
     }
 
-    query.exec((err, items) => {
+    query.exec((err, result) => {
       if (err) {
         console.error(err);
         res.status(500).send(err).end();
       } else {
-        res.send(items).end();
+        res.send(result).end();
       }
     });
   });

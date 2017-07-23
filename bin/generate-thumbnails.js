@@ -32,8 +32,6 @@ if (!Array.isArray(timemarks)) {
 const assetPaths = config.assetPaths[type];
 let promises = [];
 
-console.log(timemarks);
-
 assetPaths.forEach(assetPath => {
   promises.push(
     fs.readdir(assetPath).then(results => {
@@ -66,24 +64,24 @@ function generateThumbnails(list) {
   const folder = path.join(config.thumbsPath, type, list.name);
 
   return new Promise((resolve, reject) => {
-    switch (type) {
-      case 'video':
-        fs.readdir(folder)
-          .then(() => {
-            overwrite ? generate() : resolve();
-          })
-          .catch(err => {
-            err.code === 'ENOENT' ? generate() : reject(err);
-          });
-      break;
-      default:
-      break;
-    }
+    fs.readdir(folder)
+      .then(() => {
+        overwrite ? generate() : resolve();
+      })
+      .catch(err => {
+        err.code === 'ENOENT' ? generate() : reject(err);
+      });
 
     function generate() {
-      ffmpeg(list.path)
-        .on('end', () => resolve())
-        .thumbnails({ count: 1, timemarks, folder, filename: '%i' });
+      switch (type) {
+        case 'video':
+          ffmpeg(list.path)
+            .on('end', () => resolve())
+            .thumbnails({ count: 1, timemarks, folder, filename: '%i' });    
+        break;
+        default:
+        break;
+      }
     }
   });
 }
