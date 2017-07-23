@@ -39,6 +39,10 @@ export function createStore () {
     },
     mutations: {
       setItem (state, { store, id, data }) {
+        if (!state[store].results) {
+          state[store].results = [];
+        }
+
         const idx = state[store].results.find(item => item.id === id);
 
         if (idx) {
