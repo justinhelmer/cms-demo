@@ -6,20 +6,22 @@ const config = require('../../config');
 module.exports = done => {
   let promises = [];
 
-  Object.keys(config.assetPaths).forEach(list => {
-    promises.push(updateList(list).then(() => generateThumbs(list)));
+  Object.keys(config.assetPaths).forEach(type => {
+    promises.push(updateList(type));
   });
 
-  Promise.all(promises).then(() => done()).catch(err => done);
-  
+  Promise.all(promises)
+    .then(() => done())
+    .catch(err => done(err.stack));
+
   function extension(element) {
     var extName = path.extname(element);
     return extName === '.mp4'; 
   };
 
-  function updateList(list) {
-    const assetPaths = config.assetPaths[list];
-    const List = keystone.list(list);
+  function updateList(type) {
+    const assetPaths = config.assetPaths[type];
+    const List = keystone.list(type);
     let promises = [];
 
     assetPaths.forEach(assetPath => {
@@ -30,10 +32,14 @@ module.exports = done => {
 
             results.filter(extension).forEach(filename => {
               const name = filename.substring(0, filename.length - 4);
-              const props = { name, path: path.join(assetPath, filename) };
+              const list = { name, path: path.join(assetPath, filename) };
               const options = { new: true, upsert: true, setDefaultsOnInsert: true };
               
-              p.push(List.model.findOneAndUpdate({ name }, props, options).exec());
+              p.push(
+                List.model
+                  .findOneAndUpdate({ name }, list, options)
+                  .exec()
+              );
             });
 
             return Promise.all(p);
@@ -42,17 +48,5 @@ module.exports = done => {
     });
 
     return Promise.all(promises);
-  }
-
-  function generateThumbs(list) {
-    switch (list) {
-      case 'video':
-
-      break;
-      default:
-      break;
-    }
-    
-    return Promise.resolve();
   }
 }
