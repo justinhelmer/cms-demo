@@ -12,24 +12,26 @@ export function createStore () {
     },
     actions: {
       fetch({commit}, {endpoint, store, id, params}) {
-        const base = '/api';
-        const options = { params };
-
-        let uri = window.location.origin + base + '/' + endpoint;
+        let uri = '/api/' + endpoint;
 
         if (id) {
           uri += '/' + id;
         }
 
-        return axios.get(uri, options)
-            .then(function ({data}) {
-              if (id) {
-                commit('setItem', {store, id, data});
-              } else {
-                commit('replaceItems', {store, data});
-              }
-            })
-            .catch(error => console.log(error));
+        return axios.get(uri, {
+            params,
+            proxy: {
+              port: 3000
+            }
+          })
+          .then(function ({data}) {
+            if (id) {
+              commit('setItem', {store, id, data});
+            } else {
+              commit('replaceItems', {store, data});
+            }
+          })
+          .catch(error => console.log(err));
       }
     },
     getters: {
