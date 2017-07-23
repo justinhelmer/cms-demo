@@ -8,7 +8,7 @@
 
 @value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
 @value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
-@value blue, white from './css/colors.css';
+@value blue, white, gray from './css/colors.css';
 
 @custom-media --viewport-small (width <= 30rem);
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
@@ -44,7 +44,7 @@ main {
 
 h1 {
   font-size: t-xl;
-  border-bottom: 2px solid rgba(0,0,0,0.1);
+  border-bottom: 2px solid gray;
   margin: m-large 0;
   padding-bottom: 1rem;
 }
