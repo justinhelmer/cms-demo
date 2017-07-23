@@ -34,12 +34,14 @@ module.exports = done => {
               const name = filename.substring(0, filename.length - 4);
               const list = { name, path: path.join(assetPath, filename) };
               const options = { new: true, upsert: true, setDefaultsOnInsert: true };
-              
-              p.push(
-                List.model
+
+              const update = thumbnails(list)
+                .then(() => List.model
                   .findOneAndUpdate({ name }, list, options)
                   .exec()
-              );
+                );
+              
+              p.push(update);
             });
 
             return Promise.all(p);
@@ -48,5 +50,13 @@ module.exports = done => {
     });
 
     return Promise.all(promises);
+
+    function thumbnails(list) {
+      const folder = path.join(config.thumbsPath, type, list.name);
+
+      return fs.readdir(folder).then(res => {
+        list.thumbnails = res.join(',');
+      });
+    }
   }
 }
