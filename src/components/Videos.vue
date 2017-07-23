@@ -9,8 +9,24 @@
         </ul>
 
         <ul :class="$style.pager">
+          <li v-if="videos.previous">
+            <router-link :to="{
+              name: 'videos',
+              params: (videos.previous === 1) ? {} : { page: videos.previous }
+            }">prev</router-link>
+          </li>
+
           <li v-for="page in videos.pages">
-            <router-link :to="{ name: 'videos', params: { page: page }}">{{page}}</router-link>
+            <div v-if="page === '...'">...</div>
+            <router-link
+                v-if="page !== '...'"
+                :to="{ name: 'videos', params: (page === 1) ? {} : { page }}"
+                :exact-active-class="$style['router-link-exact-active']">{{page}}
+            </router-link>
+          </li>
+
+          <li v-if="videos.next">
+            <router-link :to="{ name: 'videos', params: { page: videos.next }}">next</router-link>
           </li>
         </ul>
     </div>
@@ -43,15 +59,19 @@
 </script>
 
 <style module>
-  @value gray from '../css/colors.css';
+  @value small as bp-small from '../css/breakpoints.css';
+  @value gray, black, blue from '../css/colors.css';
   @value large as m-large from '../css/layout.css';
   @value thumbnail-width: 28.571428rem;
+  @value pager-height: 50px;
+  @custom-selector :--active .router-link-exact-active, :hover;
 
   .grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: m-large;
+    padding-bottom: m-large;
+    margin-bottom: pager-height;
 
     & li {
       border: 1px solid gray;
@@ -63,23 +83,52 @@
         overflow: hidden;
 
         & img {
+          display: block;
           width: 100%;
         }
       }
     }
   }
 
+  @media bp-small {
+    .grid li a {
+      height: auto;
+      width: 100%;
+    }
+  }
+
   .pager {
+    background: black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
+    margin: 0 auto;
+    justify-content: center;
 
     & li {
+      border-right: 1px solid gray;
+      color: white;
+      flex-grow: 1;
+      text-align: center;
+      height: pager-height;
+      line-height: pager-height;
+      max-width: 90px;
+
+      &:last-child {
+        border-right: 0px none;
+      }
 
       & a {
         display: block;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-        text-align: center;
+        color: white;
+
+        &:--active {
+          background: blue;
+          color: white;
+          font-weight: bold;
+        }
       }
     }
   }

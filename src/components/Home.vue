@@ -6,13 +6,13 @@
           <li>
             <router-link :to="{ name: 'videos' }" :class="$style.link">
               <div v-html="icons['device-camera-video']" :class="$style.icon"></div>
-              <div :class="$style['icon-text']">Videos</div>
+              <h2 :class="$style['icon-text']">Videos</h2>
             </router-link>
           </li>
           <li>
             <router-link :to="{ name: 'photos' }" :class="$style.link">
               <div v-html="icons['device-camera']" :class="$style.icon"></div>
-              <div :class="$style['icon-text']">Photos</div>
+              <h2 :class="$style['icon-text']">Photos</h2>
             </router-link>
           </li>
         </ul>
@@ -31,8 +31,9 @@
 </script>
 
 <style module>
+  @value small as bp-small from '../css/breakpoints.css';
   @value blue, gray from '../css/colors.css';
-  @value small as p-small, large as p-large from '../css/layout.css';
+  @value small as p-small, normal as p-normal, large as p-large from '../css/layout.css';
   @value xl as t-xl from '../css/typography.css';
 
   .list {
@@ -42,6 +43,20 @@
 
     & li {
       margin: 0 p-large p-large;
+      max-width: 400px;
+      flex-grow: 1;
+
+      & a {
+        display: block;
+      }
+    }
+  }
+
+  @media bp-small {
+    .list li {
+      margin: 0 0 p-normal;
+      max-width: none;
+      width: 100%;
     }
   }
 
@@ -56,14 +71,14 @@
     padding: p-large;
 
     & svg {
-      height: 200px;
-      width: 200px;
+      height: auto;
+      width: 100%;
     }
   }
 
   .icon-text {
     background: gray;
-    font-size: t-xl;
+    margin: 0;
     padding: p-small;
     text-align: center;
   }

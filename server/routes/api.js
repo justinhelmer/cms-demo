@@ -10,7 +10,8 @@ module.exports = app => {
     } else {
       query = List.paginate({
         page: req.query.page || 1,
-        perPage: 100
+        perPage: 30,
+        maxPages: 7
       });
     }
 

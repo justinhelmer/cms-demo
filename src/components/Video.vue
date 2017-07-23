@@ -31,7 +31,7 @@
 </script>
 
 <style module>
-    @value max-width from '../css/layout.css';
+    @value max from '../css/breakpoints.css';
 
     .wrapper {
       display: flex;
@@ -46,7 +46,7 @@
 
       & video {  
         height: auto;
-        max-width: max-width;
+        max-width: max;
         width: 100%;
       }
     }

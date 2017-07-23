@@ -6,11 +6,10 @@
   line-height: 1.4;
 }
 
+@value small as bp-small from './css/breakpoints.css';
 @value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
 @value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
 @value blue, white, gray from './css/colors.css';
-
-@custom-media --viewport-small (width <= 30rem);
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 
 *, *:before, *:after {
@@ -52,3 +51,13 @@ h1 {
 h2 {  font-size: t-large; }
 ul {  list-style-type: none;  margin: 0;  padding: 0;  }
 a { color: blue; text-decoration: none; }
+
+@media bp-small {
+  h1 {
+    font-size: t-large;
+    font-weight: bold;
+    margin: 0 0 m-normal 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
