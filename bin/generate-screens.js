@@ -1,4 +1,4 @@
-//  node bin/generate-thumbnails
+//  node bin/generate-screens
 //    --type=video
 //    --count=3
 //    --offset=0
@@ -42,7 +42,7 @@ assetPaths.forEach(assetPath => {
         const list = { name, path: path.join(assetPath, filename) };
         
         if (_cnt >= offset && _cnt < (offset + count)) {
-          p.push(generateThumbnails(list));
+          p.push(generateScreens(list));
         }
 
         _cnt++;
@@ -53,15 +53,15 @@ assetPaths.forEach(assetPath => {
   );
 });
 
-Promise.all(promises).then(() => console.log('Done creating thumbnails'));
+Promise.all(promises).then(() => console.log('Done creating screenshots'));
 
 function extension(element) {
   var extName = path.extname(element);
   return extName === '.mp4'; 
 };
 
-function generateThumbnails(list) {
-  const folder = path.join(config.thumbsPath, type, list.name);
+function generateScreens(list) {
+  const folder = path.join(config.screensPath, type, list.name);
 
   return new Promise((resolve, reject) => {
     fs.readdir(folder)
@@ -77,7 +77,7 @@ function generateThumbnails(list) {
         case 'video':
           ffmpeg(list.path)
             .on('end', () => resolve())
-            .thumbnails({ count: 1, timemarks, folder, filename: '%i' });    
+            .screenshots({ count: 1, timemarks, folder, filename: '%i' });    
         break;
         default:
         break;

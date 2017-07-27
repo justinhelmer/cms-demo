@@ -15,7 +15,7 @@
           thumbsPath,
           this.$attrs.type,
           this.$attrs.list.name,
-          this.$attrs.list.thumbnails[this.$attrs.at]
+          this.$attrs.list.thumbs[this.$attrs.at]
         );
       }
     }

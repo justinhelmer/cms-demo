@@ -35,7 +35,7 @@ module.exports = done => {
               const list = { name, path: path.join(assetPath, filename) };
               const options = { new: true, upsert: true, setDefaultsOnInsert: true };
 
-              const update = thumbnails(list)
+              const update = screensAndThumbs(list)
                 .then(() => List.model
                   .findOneAndUpdate({ name }, list, options)
                   .exec()
@@ -51,12 +51,16 @@ module.exports = done => {
 
     return Promise.all(promises);
 
-    function thumbnails(list) {
-      const folder = path.join(config.thumbsPath, type, list.name);
+    function screensAndThumbs(list) {
+      return Promise.all([addToModel('screens'), addToModel('thumbs')]);
 
-      return fs.readdir(folder).then(res => {
-        list.thumbnails = res.join(',');
-      });
+      function addToModel(field) {
+        const folder = path.join(config[field + 'Path'], type, list.name);
+
+        return fs.readdir(folder).then(res => {
+          list[field] = res.join(',');
+        });
+      }
     }
   }
 }
