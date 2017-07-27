@@ -1,10 +1,10 @@
 <template>
-    <div id="app">
+    <div id="app" :class="themeCss">
         <header>
             <nav :class="$style.nav">
               <ul>
                 <li><router-link :to="{ name: 'home' }" v-html="icons.home"></router-link></li>
-                <li><a href="#" v-html="icons.paintcan" v-on:click="toggleColorScheme"></a></li>
+                <li><a href="#" v-html="icons.paintcan" v-on:click="toggleTheme"></a></li>
               </ul>
               <ul>
                 <li><a href="/keystone" v-html="icons.dashboard"></a></li>
@@ -16,29 +16,28 @@
 </template>
 
 <script>
-  import $ from 'jquery';
   import icons from './lib/icons';
+  import moment from 'moment';
 
   export default {
     name: 'app',
-
-    created: function() {
-      this.color = '#fff';
-    },
     
     data () {
-      return { icons };
+      return {
+        icons,
+        theme: moment().hour() > 18 ? 'dark' : 'light'
+      };
+    },
+
+    computed: {
+      themeCss () {
+        return this.$style['theme-' + this.theme];
+      }
     },
 
     methods: {
-      toggleColorScheme: function () {
-        if (this.color === '#fff') {
-          this.color = '#000';
-        } else {
-          this.color = '#fff';
-        }
-
-        $('body').css({ backgroundColor: this.color });
+      toggleTheme: function () {
+        this.theme = this.theme === 'light' ? 'dark' : 'light';
       }
     }
   }
@@ -49,8 +48,22 @@
 </style>
 
 <style module>
-@value blue from './css/colors.css';
+@value white, black, blue from './css/colors.css';
 @value normal as p-normal from './css/layout.css';
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+
+.theme-light {
+  background-color: white;
+}
+
+.theme-dark {
+  background-color: black;
+
+  & :--heading {
+    color: white;
+    border-color: white;
+  }
+}
 
 .nav {
   background: blue;

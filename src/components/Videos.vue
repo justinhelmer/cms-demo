@@ -1,5 +1,5 @@
 <template>
-    <div id="videos">
+    <div id="videos" :class="$style.wrapper">
         <ul :class="$style.grid">
             <li v-for="video in videos.results">
               <router-link :to="{ name: 'video', params: { id: video._id }}">
@@ -61,10 +61,14 @@
 <style module>
   @value small as bp-small from '../css/breakpoints.css';
   @value gray, black, blue from '../css/colors.css';
-  @value large as m-large from '../css/layout.css';
-  @value thumbnail-width: 28.571428rem;
+  @value neg-normal as m-neg-normal, large as m-large from '../css/layout.css';
   @value pager-height: 50px;
   @custom-selector :--active .router-link-exact-active, :hover;
+
+  .wrapper {
+    margin: m-neg-normal;
+    overflow-y: auto;
+  }
 
   .grid {
     display: flex;
@@ -75,11 +79,10 @@
 
     & li {
       border: 1px solid gray;
+      width: 25%;
 
       & a {
         display: block;
-        width: calc(thumbnail-width);
-        height: calc(thumbnail-width / 1.77778);
         overflow: hidden;
 
         & img {

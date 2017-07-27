@@ -1,8 +1,11 @@
 @value base: 1rem * 1.42857; /* 1rem = 14, base = 20 */
+@value neg-base: 1rem * -1.42857; /* 1rem = 14, base = 20 */
 
 @value small: calc(base / 2);
 @value normal: calc(base);
 @value large: calc(base * 2);
+
+@value neg-normal: calc(neg-base);
 
 .margin-small { margin: small; }
 .margin-normal { margin: normal; }
