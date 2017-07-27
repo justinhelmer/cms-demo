@@ -4,6 +4,7 @@
             <nav :class="$style.nav">
               <ul>
                 <li><router-link :to="{ name: 'home' }" v-html="icons.home"></router-link></li>
+                <li><a href="#" v-html="icons.paintcan" v-on:click="toggleColorScheme"></a></li>
               </ul>
               <ul>
                 <li><a href="/keystone" v-html="icons.dashboard"></a></li>
@@ -15,12 +16,30 @@
 </template>
 
 <script>
+  import $ from 'jquery';
   import icons from './lib/icons';
 
   export default {
     name: 'app',
+
+    created: function() {
+      this.color = '#fff';
+    },
+    
     data () {
-      return {icons};
+      return { icons };
+    },
+
+    methods: {
+      toggleColorScheme: function () {
+        if (this.color === '#fff') {
+          this.color = '#000';
+        } else {
+          this.color = '#fff';
+        }
+
+        $('body').css({ backgroundColor: this.color });
+      }
     }
   }
 </script>
