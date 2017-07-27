@@ -33,6 +33,7 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  overflow-y: auto;
 
   & > div {
     flex-grow: 1;

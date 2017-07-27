@@ -61,20 +61,18 @@
 <style module>
   @value small as bp-small from '../css/breakpoints.css';
   @value gray, black, blue from '../css/colors.css';
-  @value neg-normal as m-neg-normal, large as m-large from '../css/layout.css';
+  @value neg-normal as m-neg-normal from '../css/layout.css';
   @value pager-height: 50px;
   @custom-selector :--active .router-link-exact-active, :hover;
 
   .wrapper {
     margin: m-neg-normal;
-    overflow-y: auto;
   }
 
   .grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-bottom: m-large;
     margin-bottom: pager-height;
 
     & li {
@@ -94,8 +92,7 @@
   }
 
   @media bp-small {
-    .grid li a {
-      height: auto;
+    .grid li {
       width: 100%;
     }
   }
