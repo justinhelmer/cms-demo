@@ -1,5 +1,5 @@
 <template>
-    <div id="video">
+    <div id="video" class="content">
         <h1>{{video.name}}</h1>
 
         <div :class="$style.player">

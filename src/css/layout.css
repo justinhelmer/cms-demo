@@ -5,8 +5,6 @@
 @value normal: calc(base);
 @value large: calc(base * 2);
 
-@value neg-normal: calc(neg-base);
-
 .margin-small { margin: small; }
 .margin-normal { margin: normal; }
 .margin-large { margin: large; }

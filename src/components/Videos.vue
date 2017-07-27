@@ -1,5 +1,5 @@
 <template>
-    <div id="videos" :class="$style.wrapper">
+    <div id="videos">
         <ul :class="$style.grid">
             <li v-for="video in videos.results">
               <router-link :to="{ name: 'video', params: { id: video._id }}">
@@ -64,10 +64,6 @@
   @value neg-normal as m-neg-normal from '../css/layout.css';
   @value pager-height: 50px;
   @custom-selector :--active .router-link-exact-active, :hover;
-
-  .wrapper {
-    margin: m-neg-normal;
-  }
 
   .grid {
     display: flex;

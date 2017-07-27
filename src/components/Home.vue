@@ -1,5 +1,5 @@
 <template>
-    <div id="home">
+    <div id="home" class="content">
         <h1>Welcome</h1>
 
         <ul :class="$style.list">

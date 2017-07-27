@@ -29,7 +29,6 @@ body {  margin: 0;  }
 }
 
 main {
-  margin: m-normal;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -45,13 +44,17 @@ main {
 h1 {
   font-size: t-xl;
   border-bottom: 2px solid gray;
-  margin: m-large 0;
+  margin: m-normal 0 m-large;
   padding-bottom: 1rem;
 }
 
 h2 {  font-size: t-large; }
 ul {  list-style-type: none;  margin: 0;  padding: 0;  }
 a { color: blue; text-decoration: none; }
+
+.content {
+  margin: m-normal;
+}
 
 @media bp-small {
   h1 {
