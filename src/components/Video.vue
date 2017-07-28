@@ -9,7 +9,7 @@
         </div>
 
         <div :class="$style['below-player']">
-          <button class="btn" :data-clipboard-text="  windowsPath">Copy path</button>
+          <button :class="$style.btn" :data-clipboard-text="  windowsPath">Copy path</button>
         </div>
     </div>
 </template>
@@ -20,7 +20,7 @@
 
     mounted: function() {
       const Clipboard = require('clipboard');
-      new Clipboard('.btn');
+      new Clipboard(this.$style.btn);
     },
 
     asyncData ({ store, route }) {
@@ -46,19 +46,26 @@
 </script>
 
 <style module>
-    @value max from '../css/breakpoints.css';
-    @value normal as m-normal from '../css/layout.css';
+  @value max from '../css/breakpoints.css';
+  @value normal as m-normal from '../css/layout.css';
+  @value lrg as bp-lrg from '../css/breakpoints.css';
 
-    .player {  
-      display: block;
-      margin: 0 auto;
-      max-width: max;
-      height: auto;
-      width: 100%;
-    }
+  .player {  
+    display: block;
+    margin: 0 auto;
+    max-width: max;
+    height: auto;
+    width: 100%;
+  }
 
-    .below-player {
-      margin: m-normal auto;
-      max-width: max;
+  .below-player {
+    margin: m-normal auto;
+    max-width: max;
+  }
+
+  @media bp-lrg {
+    .btn {
+      display: none;
     }
+  }
 </style>

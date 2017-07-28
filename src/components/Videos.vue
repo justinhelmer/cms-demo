@@ -87,8 +87,8 @@
     justify-content: center;
 
     & li {
-      width: 25%;
       border: 1px solid gray-dark;
+      width: 20%;
 
       & a {
         display: block;
@@ -99,6 +99,24 @@
           width: 100%;
         }
       }
+    }
+  }
+
+  @media bp-xl {
+    .grid li {
+      width: 25%;
+    }
+  }
+
+  @media bp-lrg {
+    .grid li {
+      width: 33%;
+    }
+  }
+
+  @media bp-med {
+    .grid li {
+      width: 50%;
     }
   }
 

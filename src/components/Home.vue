@@ -52,14 +52,6 @@
     }
   }
 
-  @media bp-small {
-    .list li {
-      margin: 0 0 p-normal;
-      max-width: none;
-      width: 100%;
-    }
-  }
-
   .link {
     color: blue;
     display: inline-block;
@@ -79,5 +71,21 @@
     margin: 0;
     padding: p-small;
     text-align: center;
+  }
+
+  @media bp-small {
+    .list li {
+      margin: 0 0 p-normal;
+      max-width: none;
+      width: 100%;
+    }
+
+    .icon {
+      border-width: 1px 0;
+    }
+
+    .icon-text {
+      display: none;
+    }
   }
 </style>
