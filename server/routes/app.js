@@ -68,7 +68,8 @@ module.exports = app => {
 
     const context = {
       title: config.title,
-      url: req.url
+      url: req.url,
+      userAgent: req.locals.userAgent
     };
 
     renderer.renderToString(context, (err, html) => {

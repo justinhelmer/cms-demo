@@ -26,6 +26,7 @@
     "jquery": "^3.2.1",
     "keystone": "^4.0.0-beta.5",
     "lru-cache": "^4.1.1",
+    "mobile-detect": "^1.3.6",
     "moment": "^2.18.1",
     "mongodb": "^2.2.30",
     "octicons": "^5.0.1",

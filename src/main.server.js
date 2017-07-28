@@ -19,7 +19,7 @@ import { createApp } from './app';
 
 export default context => {
   return new Promise((resolve, reject) => {
-    const { app, router, store } = createApp();
+    const { app, router, store } = createApp(context);
 
     const { url } = context;
     const fullPath = router.resolve(url).route.fullPath;
@@ -28,7 +28,7 @@ export default context => {
       reject({ url: fullPath });
     }
 
-    router.push(context.url); // // sets the router's location
+    router.push(url); // sets the router's location
 
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents();

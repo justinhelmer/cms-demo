@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-export function createStore () {
+export function createStore ({ userAgent }) {
   return new Vuex.Store({
     state: {
       photos: {},
@@ -22,6 +22,9 @@ export function createStore () {
             params,
             proxy: {
               port: 3000
+            },
+            headers: {
+              'X-User-Agent': userAgent // tablet, mobile or desktop
             }
           })
           .then(function ({data}) {
