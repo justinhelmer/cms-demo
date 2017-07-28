@@ -4,10 +4,10 @@
             <nav :class="$style.nav">
               <ul>
                 <li><router-link :to="{ name: 'home' }" v-html="icons.home"></router-link></li>
-                <li><a href="#" v-html="icons.paintcan" v-on:click="toggleTheme"></a></li>
               </ul>
               <ul>
-                <li><a href="/keystone" v-html="icons.dashboard"></a></li>
+                <li><a href="#" v-html="icons.eye" v-on:click="toggleTheme" onclick="return false;"></a></li>
+                <li><a href="/keystone" v-html="icons.gear"></a></li>
               </ul>
             </nav>
         </header>
