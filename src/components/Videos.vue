@@ -33,12 +33,25 @@
 </template>
 
 <script>
+  import jQuery from 'jquery';
+  import events from '../lib/global-events';
   import thumbnail from './shared/Thumbnail.vue';
 
   export default {
     name: 'videos',
 
     components: { thumbnail },
+
+    mounted: function() {
+      const $vm = this;
+      const $el = jQuery(this.$el);
+      const $pager = $el.find('.' + this.$style.pager);
+
+      events.on('content-scroll', function(direction) {
+        const opposite = direction === 'up' ? 'down' : 'up';
+        $pager.addClass($vm.$style['nav-' + opposite]).removeClass($vm.$style['nav-' + direction]);
+      });
+    },
 
     asyncData ({ store, route }) {
       return store.dispatch('fetch', {
@@ -69,7 +82,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: pager-height;
 
     & li {
       border: 1px solid gray;
@@ -95,13 +107,22 @@
 
   .pager {
     background: black;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
     margin: 0 auto;
     justify-content: center;
+    position: fixed;
+    transition: bottom 0.2s ease-in-out;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    &.nav-up {
+      bottom: calc(pager-height * -1);
+    }
+
+    &.nav-down {
+      bottom: 0;
+    }
 
     & li {
       border-right: 1px solid gray;
