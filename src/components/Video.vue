@@ -22,7 +22,7 @@
 
     mounted: function() {
       const Clipboard = require('clipboard');
-      new Clipboard(this.$style.btn);
+      new Clipboard('.' + this.$style.btn);
     },
 
     asyncData ({ store, route }) {
@@ -58,7 +58,7 @@
 <style module>
   @value max from '../css/breakpoints.css';
   @value normal as m-normal from '../css/layout.css';
-  @value lrg as bp-lrg from '../css/breakpoints.css';
+  @value med as bp-med from '../css/breakpoints.css';
 
   .player {  
     display: block;
@@ -75,7 +75,7 @@
 
   .btn {}
 
-  @media bp-lrg {
+  @media bp-med {
     .btn {
       display: none;
     }
