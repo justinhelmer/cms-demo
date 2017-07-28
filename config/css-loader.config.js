@@ -9,18 +9,22 @@ const productionLoaders = [
   {
     loader: 'css-loader',
     options: {
-      importLoaders: 1,
-      modules: true
+      importLoaders: 2,
+      modules: true,
+      includePaths: [
+        path.resolve(__dirname, '../node_modules')
+      ]
     }
   },
-  { loader: 'postcss-loader' }
+  { loader: 'postcss-loader' },
+  { loader: 'sass-loader' }
 ];
 
 let devLoaders = [{ loader: 'vue-style-loader' }].concat(clone(productionLoaders));
 devLoaders.forEach(loader => set(loader, 'options.sourceMap', true));
 
 module.exports = {
-  test: /\.css$/,
+  test: /\.(css|scss)$/,
   use: isProd
     ? ExtractTextPlugin.extract({
       use: productionLoaders,

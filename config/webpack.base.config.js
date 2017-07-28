@@ -15,18 +15,7 @@ var config = {
   },
   module: {
     rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          cssSourceMap: !isProd,
-          cssModules: {
-            localIdentName: '[path][name]---[local]---[hash:base64:5]'
-          },
-          extractCSS: isProd,
-          preserveWhitespace: !isProd
-        }
-      },
+      require('./vue-loader.config'),
       {
         test: /\.js$/,
         loader: 'babel-loader',

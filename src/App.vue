@@ -84,27 +84,14 @@
   }
 </script>
 
-<style>
-    @import './css/global/app.css';
+<style lang="scss">
+    @import './css/global/app.scss';
 </style>
 
 <style module>
 @value white, black, blue from './css/colors.css';
 @value normal as p-normal from './css/layout.css';
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
-
-.theme-light {
-  background-color: white;
-}
-
-.theme-dark {
-  background-color: black;
-
-  & :--heading {
-    color: white;
-    border-color: white;
-  }
-}
 
 .nav {
   background: blue;
