@@ -15,6 +15,8 @@
 </template>
 
 <script>
+  import jQuery from 'jquery';
+
   export default {
     name: 'video',
 
@@ -40,6 +42,14 @@
         return this.$store.getters.getItemById(this.$route.params.id, 'videos').path || ''
           .replace('/mnt/a', 'A:')
           .replace(/\//g, '\\');
+      }
+    },
+
+    // note that routing from /video/:id to /video/:id will trigger update cycle, not full render cycle.
+    watch: {
+       // browser needs to reload the src of the video
+       ['video.path'] () {
+        jQuery(this.$el).find('video')[0].load();
       }
     }
   }
