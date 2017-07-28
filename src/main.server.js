@@ -31,19 +31,20 @@ export default context => {
     router.push(url); // sets the router's location
 
     router.onReady(() => {
-      const matchedComponents = router.getMatchedComponents();
+      const component = router.getMatchedComponents()[0];
 
-      if (!matchedComponents.length) {
+      if (!component) {
         reject({ code: 404 });
-      }
-
-      Promise.all(matchedComponents.map(({ asyncData }) => asyncData && asyncData({
-        store,
-        route: router.currentRoute
-      }))).then(() => {
-        context.state = store.state;
+      } else if (!component.asyncData) {
         resolve(app);
-      }).catch(reject)
+      } else {
+        component.asyncData({ store, route: router.currentRoute })
+          .then(() => {
+            context.state = store.state;
+            resolve(app);
+          })
+          .catch(reject);
+      }
     }, reject);
   });
 }

@@ -44,15 +44,13 @@ router.onReady(() => {
  * @see https://router.vuejs.org/en/api/router-instance.html
  */
 function fetchAsyncData(to, from, next) {
-  const asyncDataHooks = router
-    .getMatchedComponents(to)
-    .map(component => component.asyncData).filter(_ => _);
+  const component = router.getMatchedComponents(to)[0];
 
-  if (!asyncDataHooks.length) {
+  if (!component || !component.asyncData) {
     return next();
   }
 
-  Promise.all(asyncDataHooks.map(asyncData => asyncData({ store, route: to })))
+  component.asyncData({ store, route: to })
     .then(() => {
       next();
     })
