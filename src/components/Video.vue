@@ -37,7 +37,7 @@
       },
 
       windowsPath () {
-        return this.$store.getters.getItemById(this.$route.params.id, 'videos').path
+        return this.$store.getters.getItemById(this.$route.params.id, 'videos').path || ''
           .replace('/mnt/a', 'A:')
           .replace(/\//g, '\\');
       }

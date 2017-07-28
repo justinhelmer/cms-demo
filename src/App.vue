@@ -4,6 +4,7 @@
             <nav :class="$style.nav">
               <ul>
                 <li><router-link :to="{ name: 'home' }" v-html="icons.home"></router-link></li>
+                <li><a href="#" v-html="icons.sync" v-on:click="random" onclick="return false;"></a></li>
               </ul>
               <ul>
                 <li><a href="#" v-html="icons.eye" v-on:click="toggleTheme" onclick="return false;"></a></li>
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import jQuery from 'jquery';
   import moment from 'moment';
   import events from './lib/global-events';
@@ -79,6 +81,19 @@
     methods: {
       toggleTheme: function () {
         this.theme = this.theme === 'light' ? 'dark' : 'light';
+      },
+
+      random: function () {
+        return axios.get('/api/random/video', {
+          proxy: {
+            port: 3000
+          }
+        })
+        .then(({data}) => {
+          this.$router.push({ name: 'video', params: { id: data._id }});
+        });
+
+        return false;
       }
     }
   }

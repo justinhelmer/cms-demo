@@ -1,4 +1,5 @@
 const keystone = require('keystone');
+const random = require('mongoose-simple-random');
 const Types = keystone.Field.Types;
  
 const Video = new keystone.List('video');
@@ -18,4 +19,5 @@ Video.schema.set('toJSON', {
   }
 });
 
+Video.schema.plugin(random);
 Video.register();
