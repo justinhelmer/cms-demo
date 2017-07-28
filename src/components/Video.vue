@@ -15,13 +15,13 @@
 </template>
 
 <script>
-  if (!require('../lib/is-server')()) {
-    const Clipboard = require('clipboard');
-    new Clipboard('.btn');
-  }
-
   export default {
     name: 'video',
+
+    mounted: function() {
+      const Clipboard = require('clipboard');
+      new Clipboard('.btn');
+    },
 
     asyncData ({ store, route }) {
       return store.dispatch('fetch', {
