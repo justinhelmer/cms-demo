@@ -46,7 +46,7 @@
       const $vm = this;
       const $el = jQuery(this.$el);
       const $pager = $el.find('.' + this.$style.pager);
-
+      
       events.on('content-scroll', function(event) {
         const bottom = event.scrollPos + event.documentHeight === event.scrollHeight;
         const direction = bottom ? 'up' : event.direction;        
@@ -110,7 +110,7 @@
 
   @media bp-lrg {
     .grid li {
-      width: 33%;
+      width: 33.33333%;
     }
   }
 
