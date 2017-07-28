@@ -16,11 +16,50 @@
 </template>
 
 <script>
-  import icons from './lib/icons';
+  import jQuery from 'jquery';
   import moment from 'moment';
+  import events from './lib/global-events';
+  import icons from './lib/icons';
 
   export default {
     name: 'app',
+
+    mounted: function() {
+      const $el = jQuery(this.$el);
+      const $wrapper = $el.find('> main');
+      const $header = $el.find('> header');
+      const $footer = $el.find('footer').first();
+      const navbarHeight = $header.outerHeight();
+      let didScroll;
+      let lastScrollTop = 0;
+
+      $wrapper.on('scroll', () => {
+        didScroll = true;
+      });
+
+      setInterval(() => {
+        if (didScroll) {
+          hasScrolled();
+          didScroll = false;
+        }
+      }, 250);
+
+      function hasScrolled() {
+        var st = $wrapper.scrollTop();
+
+        if (st > lastScrollTop && st > navbarHeight) {
+          // Scroll Down
+          $header.removeClass('nav-down').addClass('nav-up');
+          events.trigger('content-scroll', 'down');
+        } else if (st < lastScrollTop) {
+          // Scroll Up
+          $header.removeClass('nav-up').addClass('nav-down');
+          events.trigger('content-scroll', 'up');
+        }
+
+        lastScrollTop = st;
+      }
+    },
     
     data () {
       return {

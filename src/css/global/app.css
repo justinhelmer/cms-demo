@@ -6,10 +6,11 @@
   line-height: 1.4;
 }
 
-@value small as bp-small from './css/breakpoints.css';
+@value small as bp-small, max from './css/breakpoints.css';
 @value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
 @value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
 @value blue, white, gray from './css/colors.css';
+@value header-height: 59px;
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 
 *, *:before, *:after {
@@ -17,6 +18,19 @@
 }
 
 body {  margin: 0;  }
+
+header {
+  position: fixed;
+  transition: top 0.2s ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: header-height;
+
+  &.nav-up {
+    top: calc(header-height * -1);
+  }
+}
 
 #app {
   position: absolute;
@@ -33,9 +47,12 @@ main {
   flex-direction: column;
   flex-grow: 1;
   overflow-y: auto;
+  align-items: center;
 
   & > div {
     flex-grow: 1;
+    margin-top: header-height;
+    width: 100%;
   }
 }
 
@@ -44,7 +61,7 @@ main {
 h1 {
   font-size: t-xl;
   border-bottom: 2px solid gray;
-  margin: m-normal 0 m-large;
+  margin: m-large 0;
   padding-bottom: 1rem;
 }
 
@@ -53,7 +70,9 @@ ul {  list-style-type: none;  margin: 0;  padding: 0;  }
 a { color: blue; text-decoration: none; }
 
 .content {
-  margin: m-normal;
+  margin-left: m-normal;
+  margin-right: m-normal;
+  max-width: max;
 }
 
 @media bp-small {
