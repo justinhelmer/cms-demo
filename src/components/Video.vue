@@ -9,7 +9,7 @@
         </div>
 
         <div :class="$style['below-player']">
-          <button :class="$style.btn" :data-clipboard-text="  windowsPath">Copy path</button>
+          <button :class="$style.btn" :data-clipboard-text="windowsPath">Copy path</button>
         </div>
     </div>
 </template>
@@ -62,6 +62,8 @@
     margin: m-normal auto;
     max-width: max;
   }
+
+  .btn {}
 
   @media bp-lrg {
     .btn {
