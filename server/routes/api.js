@@ -5,14 +5,27 @@ module.exports = app => {
     const List = keystone.list(req.params.endpoint);
     let query;
 
+    const opts = {
+      mobile: {
+        perPage: 12,
+        maxPages: 5
+      },
+      tablet: {
+        perPage: 24,
+        maxPages: 10,
+      },
+      desktop: {
+        perPage: 120,
+        maxPages: 15
+      }
+    };
+
     if (req.params.id) {
       query = List.model.findById(req.params.id);
     } else {
-      query = List.paginate({
-        page: req.query.page || 1,
-        perPage: 28,
-        maxPages: 15
-      });
+      query = List.paginate(Object.assign({
+        page: req.query.page || 1
+      }, opts[req.locals.userAgent]));
     }
 
     query.exec((err, result) => {
