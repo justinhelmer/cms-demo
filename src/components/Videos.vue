@@ -47,8 +47,11 @@
       const $el = jQuery(this.$el);
       const $pager = $el.find('.' + this.$style.pager);
 
-      events.on('content-scroll', function(direction) {
+      events.on('content-scroll', function(event) {
+        const bottom = event.scrollPos + event.documentHeight === event.scrollHeight;
+        const direction = bottom ? 'up' : event.direction;        
         const opposite = direction === 'up' ? 'down' : 'up';
+
         $pager.addClass($vm.$style['nav-' + opposite]).removeClass($vm.$style['nav-' + direction]);
       });
     },

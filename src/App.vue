@@ -31,7 +31,7 @@
       const $footer = $el.find('footer').first();
       const navbarHeight = $header.outerHeight();
       let didScroll;
-      let lastScrollTop = 0;
+      let lastScrollPos = 0;
 
       $wrapper.on('scroll', () => {
         didScroll = true;
@@ -45,19 +45,21 @@
       }, 250);
 
       function hasScrolled() {
-        var st = $wrapper.scrollTop();
+        const scrollPos = $wrapper.scrollTop();
+        const documentHeight = $wrapper.height();
+        const scrollHeight = $wrapper[0].scrollHeight;
 
-        if (st > lastScrollTop && st > navbarHeight) {
+        if (scrollPos > lastScrollPos && scrollPos > navbarHeight) {
           // Scroll Down
           $header.removeClass('nav-down').addClass('nav-up');
-          events.trigger('content-scroll', 'down');
-        } else if (st < lastScrollTop) {
+          events.trigger('content-scroll', { direction: 'down', scrollPos, documentHeight, scrollHeight });
+        } else if (scrollPos < lastScrollPos) {
           // Scroll Up
           $header.removeClass('nav-up').addClass('nav-down');
-          events.trigger('content-scroll', 'up');
+          events.trigger('content-scroll', { direction: 'up', scrollPos, documentHeight, scrollHeight });
         }
 
-        lastScrollTop = st;
+        lastScrollPos = scrollPos;
       }
     },
     
@@ -70,7 +72,7 @@
 
     computed: {
       themeCss () {
-        return this.$style['theme-' + this.theme];
+        return 'theme-' + this.theme;
       }
     },
 
