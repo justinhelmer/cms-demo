@@ -75,8 +75,8 @@
 </script>
 
 <style module>
-  @value small as bp-small from '../css/breakpoints.css';
-  @value gray, black, blue from '../css/colors.css';
+  @value small as bp-small, med as bp-med, lrg as bp-lrg, xl as bp-xl from '../css/breakpoints.css';
+  @value gray-dark, black, blue from '../css/colors.css';
   @value neg-normal as m-neg-normal from '../css/layout.css';
   @value pager-height: 50px;
   @custom-selector :--active .router-link-exact-active, :hover;
@@ -87,8 +87,8 @@
     justify-content: center;
 
     & li {
-      border: 1px solid gray;
       width: 25%;
+      border: 1px solid gray-dark;
 
       & a {
         display: block;
@@ -128,7 +128,7 @@
     }
 
     & li {
-      border-right: 1px solid gray;
+      border-right: 1px solid gray-dark;
       color: white;
       flex-grow: 1;
       text-align: center;

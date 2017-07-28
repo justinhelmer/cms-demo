@@ -32,7 +32,7 @@
 
 <style module>
   @value small as bp-small from '../css/breakpoints.css';
-  @value blue, gray from '../css/colors.css';
+  @value blue, gray-dark, gray-light from '../css/colors.css';
   @value small as p-small, normal as p-normal, large as p-large from '../css/layout.css';
   @value xl as t-xl from '../css/typography.css';
 
@@ -61,13 +61,12 @@
   }
 
   .link {
-    border: ;
     color: blue;
     display: inline-block;
   }
 
   .icon {
-    border: 2px solid gray;
+    border: 2px solid gray-light;
     padding: p-large;
 
     & svg {
@@ -77,7 +76,6 @@
   }
 
   .icon-text {
-    background: gray;
     margin: 0;
     padding: p-small;
     text-align: center;

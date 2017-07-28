@@ -1,4 +1,5 @@
 @value blue: #1385e5;
 @value white: #fafafa;
-@value gray: rgba(0,0,0,0.1);
+@value gray-dark: rgba(0,0,0,0.2);
+@value gray-light: #dedede;
 @value black: rgba(0,0,0,0.8);
