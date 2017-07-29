@@ -1,6 +1,9 @@
+const _ = require('lodash');
 const isProd = process.env.NODE_ENV === 'production';
 let scss = require('./css-loader.config').use;
-scss[1].options.modules = false;
+
+const cssLoader = _.find(scss, { loader : 'css-loader' });
+cssLoader.options.modules = false;
 
 module.exports = {
   test: /\.vue$/,
