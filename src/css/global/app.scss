@@ -1,4 +1,10 @@
-@import "settings/settings.scss";
+@value small as bp-small, max from './css/breakpoints.css';
+@value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
+@value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
+@value blue, white, gray, black from './css/colors.css';
+@value header-height: 53px;
+
+@import "./settings.scss";
 @import "foundation.scss";
 @import "font-awesome.scss";
 @import "ffab.scss";
@@ -7,18 +13,13 @@
 @include foundation-button;
 @include ffab-everything;
 
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+
 :root {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   font-size: 14px; /* sets rem base */
   line-height: 1.4;
 }
-
-@value small as bp-small, max from './css/breakpoints.css';
-@value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
-@value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
-@value blue, white, gray, black from './css/colors.css';
-@value header-height: 53px;
-@custom-selector :--heading h1, h2, h3, h4, h5, h6;
 
 *, *:before, *:after {
   box-sizing: border-box;
