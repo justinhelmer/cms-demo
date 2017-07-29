@@ -1,8 +1,8 @@
 <template>
     <div id="magazines">
         <h1>magazines</h1>
-        <ul :class="$style.list">
-            <li v-for="magazine in magazines" :class="$style.list">
+        <ul class="list">
+            <li v-for="magazine in magazines">
               {{magazine.name}}
             </li>
         </ul>
@@ -28,7 +28,7 @@
   }
 </script>
 
-<style module>
+<style lang="scss" scoped>
     .list {
         display: flex;
     }

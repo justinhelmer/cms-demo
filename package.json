@@ -55,7 +55,6 @@
     "memory-fs": "^0.4.1",
     "node-sass": "^4.5.3",
     "postcss-cssnext": "^2.11.0",
-    "postcss-icss-values": "^2.0.1",
     "postcss-loader": "^2.0.6",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",

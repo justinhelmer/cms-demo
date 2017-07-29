@@ -2,14 +2,15 @@
     <div id="video" class="content">
         <h1>{{video.name}}</h1>
 
-        <div :class="$style.player">
-          <video controls :class="$style.player">
-            <source :src="video.path" type="video/mp4">
-          </video>
+        <div class="player">
+            <video controls>
+                <source :src="video.path" type="video/mp4">
+            </video>
         </div>
 
-        <div :class="$style['below-player']">
-          <button :class="[$style.btn, 'button', 'large', 'ffab',  'fa-clipboard']" :data-clipboard-text="windowsPath">Copy path</button>
+        <div class="below-player">
+            <button id="copy-path" class="button large ffab fa-clipboard" :data-clipboard-text="windowsPath">Copy path
+            </button>
         </div>
     </div>
 </template>
@@ -20,12 +21,12 @@
   export default {
     name: 'video',
 
-    mounted: function() {
+    mounted: function () {
       const Clipboard = require('clipboard');
-      new Clipboard('.' + this.$style.btn);
+      new Clipboard('#copy-path');
     },
 
-    asyncData ({ store, route }) {
+    asyncData({store, route}) {
       return store.dispatch('fetch', {
         id: route.params.id,
         store: 'videos',
@@ -34,11 +35,11 @@
     },
 
     computed: {
-      video () {
+      video() {
         return this.$store.getters.getItemById(this.$route.params.id, 'videos');
       },
 
-      windowsPath () {
+      windowsPath() {
         return this.$store.getters.getItemById(this.$route.params.id, 'videos').path || ''
           .replace('/mnt/a', 'A:')
           .replace(/\//g, '\\');
@@ -47,38 +48,38 @@
 
     // note that routing from /video/:id to /video/:id will trigger update cycle, not full render cycle.
     watch: {
-       // browser needs to reload the src of the video
-       ['video.path'] () {
+      // browser needs to reload the src of the video
+      ['video.path']() {
         jQuery(this.$el).find('video')[0].load();
       }
     }
   }
 </script>
 
-<style module>
-  @value max from '../css/breakpoints.css';
-  @value normal as m-normal from '../css/layout.css';
-  @value med as bp-med from '../css/breakpoints.css';
+<style lang="scss" scoped>
+    @import '../css/settings.scss';
 
-  .player {  
-    display: block;
-    margin: 0 auto;
-    max-width: max;
-    height: auto;
-    width: 100%;
-  }
+    .player {
+        display: block;
+        margin: 0 auto;
+        max-width: $global-width;
+        height: auto;
+        width: 100%;
 
-  .below-player {
-    margin: m-normal auto;
-    max-width: max;
-    text-align: right;
-  }
-
-  .btn {}
-
-  @media bp-med {
-    .btn {
-      display: none;
+        video {
+            width: 100%;
+        }
     }
-  }
+
+    .below-player {
+        margin: $global-margin auto;
+        max-width: $global-width;
+        text-align: right;
+    }
+
+    @include breakpoint(medium down) {
+        #copy-path {
+            display: none;
+        }
+    }
 </style>

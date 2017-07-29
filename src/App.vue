@@ -1,145 +1,38 @@
 <template>
-    <div id="app" :class="themeCss">
-        <header>
-            <nav :class="$style.nav">
-              <ul>
-                <li><router-link :to="{ name: 'home' }" class="fa fa-home fa-lg"></router-link></li>
-                <li><a href="#" class="fa fa-random fa-lg" v-on:click="random" onclick="return false;"></a></li>
-              </ul>
-              <ul>
-                <li><a href="#" class="fa fa-lightbulb-o fa-lg" v-on:click="toggleTheme" onclick="return false;"></a></li>
-                <li><a href="/keystone" class="fa fa-cog fa-lg"></a></li>
-              </ul>
-            </nav>
-        </header>
-        <main><router-view></router-view></main>
+    <div id="app" :class="theme">
+        <appHeader :theme="theme"></appHeader>
+        <main>
+            <router-view></router-view>
+        </main>
     </div>
 </template>
 
 <script>
-  import axios from 'axios';
-  import jQuery from 'jquery';
-  import moment from 'moment';
+  import appHeader from './components/global/Header.vue';
   import events from './lib/global-events';
+  import moment from 'moment';
+
+  const currentHour = moment().hour();
 
   export default {
     name: 'app',
 
-    mounted: function() {
-      const $el = jQuery(this.$el);
-      const $wrapper = $el.find('> main');
-      const $header = $el.find('> header');
-      const $footer = $el.find('footer').first();
-      const navbarHeight = $header.outerHeight();
-      let didScroll;
-      let lastScrollPos = 0;
+    components: {appHeader},
 
-      $wrapper.on('scroll', () => {
-        didScroll = true;
+    mounted: function () {
+      events.on('theme-change', (theme) => {
+        this.theme = theme;
       });
-
-      setInterval(() => {
-        if (didScroll) {
-          hasScrolled();
-          didScroll = false;
-        }
-      }, 250);
-
-      function hasScrolled() {
-        const scrollPos = $wrapper.scrollTop();
-        const documentHeight = $wrapper.height();
-        const scrollHeight = $wrapper[0].scrollHeight;
-
-        if (scrollPos > lastScrollPos && scrollPos > navbarHeight) {
-          // Scroll Down
-          $header.removeClass('nav-down').addClass('nav-up');
-          events.trigger('content-scroll', { direction: 'down', scrollPos, documentHeight, scrollHeight });
-        } else if (scrollPos < lastScrollPos) {
-          // Scroll Up
-          $header.removeClass('nav-up').addClass('nav-down');
-          events.trigger('content-scroll', { direction: 'up', scrollPos, documentHeight, scrollHeight });
-        }
-
-        lastScrollPos = scrollPos;
-      }
     },
-    
-    data () {
+
+    data() {
       return {
-        theme: moment().hour() > 18 ? 'dark' : 'light'
+        theme: (currentHour > 18 || currentHour < 8) ? 'dark' : 'light'
       };
-    },
-
-    computed: {
-      themeCss () {
-        return 'theme-' + this.theme;
-      }
-    },
-
-    methods: {
-      toggleTheme: function () {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
-      },
-
-      random: function () {
-        return axios.get('/api/random/video', {
-          proxy: {
-            port: 3000
-          }
-        })
-        .then(({data}) => {
-          this.$router.push({ name: 'video', params: { id: data._id }});
-        });
-
-        return false;
-      }
     }
   }
 </script>
 
 <style lang="scss">
-    @import './css/global/app.scss';
+    @import './css/app.scss';
 </style>
-
-<style module>
-@value white, black, blue from './css/colors.css';
-@value normal as p-normal from './css/layout.css';
-@custom-selector :--heading h1, h2, h3, h4, h5, h6;
-
-.nav {
-  background: blue;
-  display: flex;
-  justify-content: space-between;
-
-  & ul {
-    display: flex;
-  }
-
-  & li {
-    position: relative;
-  }
-
-  & li::before {
-    transform: translate(0, -50%); 
-    background-color: rgba(255,255,255,0.2);
-    content: " ";
-    left: 0;
-    height: 1em;
-    position: absolute;
-    top: 50%;
-    width: 1px;
-    z-index: 1;
-  }
-
-  & li:first-child::before {
-    display: none
-  }
-
-  & a {
-    color: #fff;
-    display: inline-block;
-    padding: p-normal;
-  }
-}
-</style>
-

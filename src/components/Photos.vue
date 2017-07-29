@@ -1,8 +1,8 @@
 <template>
     <div id="photos">
         <h1>photos</h1>
-        <ul :class="$style.list">
-            <li v-for="photo in photos" :class="$style.list">
+        <ul class="list">
+            <li v-for="photo in photos">
               {{photo.name}}
             </li>
         </ul>
@@ -28,7 +28,7 @@
   }
 </script>
 
-<style module>
+<style lang="scss" scoped>
     .list {
         display: flex;
     }

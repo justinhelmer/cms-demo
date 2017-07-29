@@ -1,6 +1,0 @@
-@value max: 1100px;
-
-@value small: (max-width: 479px);
-@value med: (max-width: 1023px);
-@value lrg: (max-width: 1439px);
-@value xl: (max-width: 2159px);
