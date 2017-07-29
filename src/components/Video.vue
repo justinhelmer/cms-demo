@@ -9,7 +9,7 @@
         </div>
 
         <div :class="$style['below-player']">
-          <button :class="[$style.btn, 'button', 'ffab']" :data-clipboard-text="windowsPath">Copy path</button>
+          <button :class="[$style.btn, 'button', 'large', 'ffab',  'fa-clipboard']" :data-clipboard-text="windowsPath">Copy path</button>
         </div>
     </div>
 </template>
@@ -71,6 +71,7 @@
   .below-player {
     margin: m-normal auto;
     max-width: max;
+    text-align: right;
   }
 
   .btn {}
