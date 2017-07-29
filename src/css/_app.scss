@@ -4,6 +4,7 @@
 @import 'ffab.scss';
 
 @include foundation-global-styles;
+@include foundation-typography;
 @include foundation-button;
 @include ffab-everything;
 
@@ -42,10 +43,6 @@ main {
     margin-top: $header-height;
     width: 100%;
   }
-}
-
-a {
-  text-decoration: none;
 }
 
 .content {
