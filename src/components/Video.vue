@@ -9,7 +9,7 @@
         </div>
 
         <div :class="$style['below-player']">
-          <button :class="$style.btn" :data-clipboard-text="windowsPath">Copy path</button>
+          <button :class="[$style.btn, 'button', 'ffab']" :data-clipboard-text="windowsPath">Copy path</button>
         </div>
     </div>
 </template>

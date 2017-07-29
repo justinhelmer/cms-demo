@@ -21,7 +21,8 @@ const productionLoaders = [
     options: {
       includePaths: [
         path.resolve(__dirname, '../node_modules/foundation-sites/scss'),
-        path.resolve(__dirname, '../node_modules/font-awesome/scss')
+        path.resolve(__dirname, '../node_modules/font-awesome/scss'),
+        path.resolve(__dirname, '../node_modules/foundation-font-awesome-buttons/src')
       ]
     }
   }

@@ -50,6 +50,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "font-awesome": "^4.7.0",
     "forever-monitor": "^1.7.1",
+    "foundation-font-awesome-buttons": "^3.3.2",
     "foundation-sites": "^6.4.1",
     "memory-fs": "^0.4.1",
     "node-sass": "^4.5.3",
