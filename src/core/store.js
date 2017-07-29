@@ -8,6 +8,7 @@ export function createStore ({ userAgent }) {
   return new Vuex.Store({
     state: {
       photos: { results: [] },
+      magazines: { results: [] },
       videos: { results: [] }
     },
     actions: {

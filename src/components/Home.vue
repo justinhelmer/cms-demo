@@ -15,6 +15,12 @@
               <h2 :class="$style['icon-text']">Photos</h2>
             </router-link>
           </li>
+          <li>
+            <router-link :to="{ name: 'magazines' }" :class="$style.link">
+              <div :class="[$style.icon, 'fa', 'fa-file-pdf-o', 'fa-5x']"></div>
+              <h2 :class="$style['icon-text']">Magazines</h2>
+            </router-link>
+          </li>
         </ul>
     </div>
 </template>

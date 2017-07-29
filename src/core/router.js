@@ -29,6 +29,11 @@ export function createRouter () {
         component: () => import('../components/Photos.vue')
       },
       {
+        name: 'magazines',
+        path: '/magazines',
+        component: () => import('../components/Magazines.vue')
+      },
+      {
         name: 'videos',
         path: '/videos/:page?',
         component: () => import('../components/Videos.vue')
