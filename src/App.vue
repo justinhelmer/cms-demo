@@ -3,12 +3,12 @@
         <header>
             <nav :class="$style.nav">
               <ul>
-                <li><router-link :to="{ name: 'home' }" v-html="icons.home"></router-link></li>
-                <li><a href="#" v-html="icons.sync" v-on:click="random" onclick="return false;"></a></li>
+                <li><router-link :to="{ name: 'home' }" class="fa fa-home fa-lg"></router-link></li>
+                <li><a href="#" class="fa fa-random fa-lg" v-on:click="random" onclick="return false;"></a></li>
               </ul>
               <ul>
-                <li><a href="#" v-html="icons.eye" v-on:click="toggleTheme" onclick="return false;"></a></li>
-                <li><a href="/keystone" v-html="icons.gear"></a></li>
+                <li><a href="#" class="fa fa-lightbulb-o fa-lg" v-on:click="toggleTheme" onclick="return false;"></a></li>
+                <li><a href="/keystone" class="fa fa-cog fa-lg"></a></li>
               </ul>
             </nav>
         </header>
@@ -21,7 +21,6 @@
   import jQuery from 'jquery';
   import moment from 'moment';
   import events from './lib/global-events';
-  import icons from './lib/icons';
 
   export default {
     name: 'app',
@@ -67,7 +66,6 @@
     
     data () {
       return {
-        icons,
         theme: moment().hour() > 18 ? 'dark' : 'light'
       };
     },

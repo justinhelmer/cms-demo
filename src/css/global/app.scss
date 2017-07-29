@@ -1,4 +1,4 @@
-@import "~octicons/build/octicons.css";
+@import "font-awesome.scss";
 
 :root {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -10,7 +10,7 @@
 @value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
 @value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
 @value blue, white, gray-dark, gray-light, black from './css/colors.css';
-@value header-height: 59px;
+@value header-height: 53px;
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 
 *, *:before, *:after {
@@ -31,6 +31,7 @@ header {
   left: 0;
   right: 0;
   height: header-height;
+  overflow: hidden;
   z-index: 1;
 
   &.nav-up {

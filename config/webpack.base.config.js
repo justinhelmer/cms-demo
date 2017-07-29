@@ -16,6 +16,7 @@ var config = {
   module: {
     rules: [
       require('./vue-loader.config'),
+      require('./css-loader.config'),
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -29,7 +30,8 @@ var config = {
           name: '[name].[ext]?[hash]'
         }
       },
-      require('./css-loader.config')
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' }
     ]
   },
   performance: {

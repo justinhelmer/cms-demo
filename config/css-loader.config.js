@@ -11,13 +11,19 @@ const productionLoaders = [
     options: {
       importLoaders: 2,
       modules: true,
-      includePaths: [
-        path.resolve(__dirname, '../node_modules')
-      ]
+      alias: {
+        '../fonts': path.resolve(__dirname, '../node_modules/font-awesome/fonts'),
+      }
     }
   },
   { loader: 'postcss-loader' },
-  { loader: 'sass-loader' }
+  { loader: 'sass-loader',
+    options: {
+      includePaths: [
+        path.resolve(__dirname, '../node_modules/font-awesome/scss')
+      ]
+    }
+  }
 ];
 
 let devLoaders = [{ loader: 'vue-style-loader' }].concat(clone(productionLoaders));

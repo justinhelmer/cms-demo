@@ -5,13 +5,13 @@
         <ul :class="$style.list">
           <li>
             <router-link :to="{ name: 'videos' }" :class="$style.link">
-              <div v-html="icons['device-camera-video']" :class="$style.icon"></div>
+              <div :class="[$style.icon, 'fa', 'fa-video-camera', 'fa-5x']"></div>
               <h2 :class="$style['icon-text']">Videos</h2>
             </router-link>
           </li>
           <li>
             <router-link :to="{ name: 'photos' }" :class="$style.link">
-              <div v-html="icons['device-camera']" :class="$style.icon"></div>
+              <div :class="[$style.icon, 'fa', 'fa-camera', 'fa-5x']"></div>
               <h2 :class="$style['icon-text']">Photos</h2>
             </router-link>
           </li>
@@ -20,13 +20,8 @@
 </template>
 
 <script>
-  import icons from '../lib/icons';
-
   export default {
-    name: 'home',
-    data () {
-      return {icons};
-    }
+    name: 'home'
   }
 </script>
 
@@ -42,12 +37,13 @@
     justify-content: center;
 
     & li {
-      margin: 0 p-large p-large;
+      margin: 0 p-normal p-normal;
       max-width: 400px;
       flex-grow: 1;
 
       & a {
         display: block;
+        text-align: center;
       }
     }
   }
@@ -60,12 +56,7 @@
   .icon {
     border: 2px solid gray-light;
     padding: p-large;
-
-    & svg {
-      height: auto;
-      max-height: 100%;
-      width: 100%;
-    }
+    width: 155px;
   }
 
   .icon-text {
