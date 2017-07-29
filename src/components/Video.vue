@@ -77,7 +77,7 @@
         text-align: right;
     }
 
-    @include breakpoint(medium down) {
+    @include breakpoint(large down) {
         #copy-path {
             display: none;
         }
