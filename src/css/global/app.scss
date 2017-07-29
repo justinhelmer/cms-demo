@@ -16,7 +16,7 @@
 @value small as bp-small, max from './css/breakpoints.css';
 @value normal as t-normal, large as t-large, xl as t-xl from './css/typography.css';
 @value small as m-small, normal as m-normal, large as m-large from './css/layout.css';
-@value blue, white, gray-dark, gray-light, black from './css/colors.css';
+@value blue, white, gray, black from './css/colors.css';
 @value header-height: 53px;
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 
@@ -74,7 +74,7 @@ main {
 
 h1 {
   font-size: t-xl;
-  border-bottom: 2px solid gray-light;
+  border-bottom: 2px solid gray;
   margin: m-normal 0 m-large 0;
   padding: 1rem 0;
 }
@@ -96,13 +96,14 @@ a { color: blue; text-decoration: none; }
   background-color: black;
 
   & :--heading {
+    border-color: white;
     color: white;
   }
 }
 
 @media bp-small {
   h1 {
-    background: gray-dark;
+    background: gray;
     font-size: t-large;
     font-weight: bold;
     margin: 0 calc(m-small * -1) m-normal;

@@ -27,7 +27,7 @@
 
 <style module>
   @value small as bp-small from '../css/breakpoints.css';
-  @value blue, gray-dark, gray-light from '../css/colors.css';
+  @value blue, gray from '../css/colors.css';
   @value small as p-small, normal as p-normal, large as p-large from '../css/layout.css';
   @value xl as t-xl from '../css/typography.css';
 
@@ -54,7 +54,10 @@
   }
 
   .icon {
-    border: 2px solid gray-light;
+    background: gray;
+    border-width: 0;
+    border-style: solid;
+    border-color: gray;
     padding: p-large;
     width: 155px;
   }
