@@ -60,9 +60,6 @@
 
     .icon {
         background: $gray;
-        border-width: 0;
-        border-style: solid;
-        border-color: $gray;
         padding: rem-calc(60);
         width: rem-calc(200);
     }
