@@ -38,6 +38,7 @@
 <style lang="scss">
     @import './css/settings.scss';
     @import 'foundation.scss';
+    @import 'motion-ui';
     @import 'font-awesome.scss';
     @import 'ffab.scss';
 
@@ -47,6 +48,8 @@
     @include foundation-button;
     @include foundation-visibility-classes;
     @include foundation-flex-classes;
+    @include motion-ui-transitions;
+    @include motion-ui-animations;
     @include ffab-everything;
 
     $white: get-color(white);
