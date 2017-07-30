@@ -3,7 +3,7 @@ const $ = require('jquery');
 const Foundation = require('foundation-sites/js/foundation.core').Foundation;
 
 module.exports = function(options = {}) {
-  const options = _.defaults(options, {
+  _.defaults(options, {
     plugins: []
   });
 
