@@ -1,34 +1,38 @@
 <template>
     <div id="videos">
-        <div class="grid">
-            <div v-for="video in videos.results" class="video">
+        <div class="grid-x">
+            <div v-for="video in videos.results" class="video medium-6 large-4 xlarge-3 xxlarge-2 cell">
                 <router-link :to="{ name: 'video', params: { id: video._id }}">
                     <thumbnail :list="video" type="video" at="0"></thumbnail>
                 </router-link>
             </div>
         </div>
 
-        <ul class="pager">
-            <li v-if="videos.previous">
-                <router-link :to="{
-                      name: 'videos',
-                      params: (videos.previous === 1) ? {} : { page: videos.previous }
-                    }">prev
-                </router-link>
-            </li>
+        <div class="pager">
+            <div class="grid-container grid-container-padded">
+                <ul class="align-center">
+                    <li v-if="videos.previous" class="auto cell">
+                        <router-link :to="{
+                          name: 'videos',
+                          params: (videos.previous === 1) ? {} : { page: videos.previous }
+                        }">prev
+                        </router-link>
+                    </li>
 
-            <li v-for="page in videos.pages">
-                <div v-if="page === '...'">...</div>
-                <router-link
-                        v-if="page !== '...'"
-                        :to="{ name: 'videos', params: (page === 1) ? {} : { page }}">{{page}}
-                </router-link>
-            </li>
+                    <li v-for="page in videos.pages" class="auto cell">
+                        <div v-if="page === '...'">...</div>
+                        <router-link
+                                v-if="page !== '...'"
+                                :to="{ name: 'videos', params: (page === 1) ? {} : { page }}">{{page}}
+                        </router-link>
+                    </li>
 
-            <li v-if="videos.next">
-                <router-link :to="{ name: 'videos', params: { page: videos.next }}">next</router-link>
-            </li>
-        </ul>
+                    <li v-if="videos.next" class="auto cell">
+                        <router-link :to="{ name: 'videos', params: { page: videos.next }}">next</router-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -76,6 +80,7 @@
 
 <style lang="scss" scoped>
     @import '../css/settings.scss';
+    @import 'xy-grid/xy-grid.scss';
     @custom-selector :--active .router-link-exact-active, :hover;
 
     $black: get-color(black);
@@ -85,51 +90,12 @@
 
     $pager-height: 50px;
 
-    .grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
     .video {
         border: 1px solid $gray;
     }
 
-    @include breakpoint(small only) {
-        .video {
-            width: 100%;
-        }
-    }
-
-    @include breakpoint(medium only) {
-        .video {
-            width: 50%;
-        }
-    }
-
-    @include breakpoint(large only) {
-        .video {
-            width: 33.3333333%;
-        }
-    }
-
-    @include breakpoint(xlarge only) {
-        .video {
-            width: 25%;
-        }
-    }
-
-    @include breakpoint(xxlarge up) {
-        .video {
-            width: 20%;
-        }
-    }
-
     .pager {
         background: $black;
-        display: flex;
-        margin: 0 auto;
-        justify-content: center;
         position: fixed;
         transition: bottom 0.2s ease-in-out;
         bottom: 0;
@@ -144,28 +110,32 @@
             bottom: 0;
         }
 
-        & li {
-            border-right: 1px solid $gray;
-            color: $white;
-            flex-grow: 1;
-            list-style-type: none;
-            text-align: center;
-            height: $pager-height;
-            line-height: $pager-height;
-            max-width: 90px;
+        ul {
+            @include xy-grid(horizontal, false);
+            margin: 0;
 
-            &:last-child {
-                border-right: 0 none;
-            }
-
-            & a {
-                display: block;
+            li {
+                border-right: 1px solid $gray;
                 color: $white;
+                list-style-type: none;
+                text-align: center;
+                height: $pager-height;
+                line-height: $pager-height;
 
-                &:--active {
-                    background: $blue;
+                &:last-child {
+                    border-right: 0 none;
+                }
+
+                a {
                     color: $white;
-                    font-weight: bold;
+                    display: block;
+                    padding: 0 rem-calc(20);
+
+                    &:--active {
+                        background: $blue;
+                        color: $white;
+                        font-weight: bold;
+                    }
                 }
             }
         }

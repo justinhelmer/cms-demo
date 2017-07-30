@@ -1,16 +1,18 @@
 <template>
-    <div id="video" class="content">
-        <h1>{{video.name}}</h1>
+    <div id="video" class="grid-container grid-container-padded">
+        <div class="grid-y">
+            <h1>{{video.name}}</h1>
 
-        <div class="player">
-            <video controls>
-                <source :src="video.path" type="video/mp4">
-            </video>
-        </div>
+            <div class="player">
+                <video controls>
+                    <source :src="video.path" type="video/mp4">
+                </video>
+            </div>
 
-        <div class="below-player">
-            <button id="copy-path" class="button large ffab fa-clipboard" :data-clipboard-text="windowsPath">Copy path
-            </button>
+            <div class="below-player">
+                <button id="copy-path" class="button large ffab fa-clipboard show-for-xlarge" :data-clipboard-text="windowsPath">Copy path
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -75,11 +77,5 @@
         margin: $global-margin auto;
         max-width: $global-width;
         text-align: right;
-    }
-
-    @include breakpoint(large down) {
-        #copy-path {
-            display: none;
-        }
     }
 </style>

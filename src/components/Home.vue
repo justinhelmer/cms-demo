@@ -1,25 +1,27 @@
 <template>
-    <div id="home" class="content">
-        <h1>Welcome</h1>
+    <div id="home" class="grid-container grid-container-padded">
+        <div class="grid-y">
+            <h1>Welcome</h1>
 
-        <div class="tiles">
-            <div>
-                <router-link :to="{ name: 'videos' }" class="link">
-                    <div class="icon fa fa-video-camera fa-5x"></div>
-                    <h2 class="icon-text">Videos</h2>
-                </router-link>
-            </div>
-            <div>
-                <router-link :to="{ name: 'photos' }" class="link">
-                    <div class="icon fa fa-camera fa-5x"></div>
-                    <h2 class="icon-text">Photos</h2>
-                </router-link>
-            </div>
-            <div>
-                <router-link :to="{ name: 'magazines' }" class="link">
-                    <div class="icon fa fa-file-pdf-o fa-5x"></div>
-                    <h2 class="icon-text">Magazines</h2>
-                </router-link>
+            <div class="tiles grid-x">
+                <div class="tile medium-4 cell">
+                    <router-link :to="{ name: 'videos' }" class="link">
+                        <div class="icon fa fa-video-camera fa-5x"></div>
+                        <div class="icon-text">Videos</div>
+                    </router-link>
+                </div>
+                <div class="tile medium-4 cell">
+                    <router-link :to="{ name: 'photos' }" class="link">
+                        <div class="icon fa fa-camera fa-5x"></div>
+                        <div class="icon-text">Photos</div>
+                    </router-link>
+                </div>
+                <div class="tile medium-4 cell">
+                    <router-link :to="{ name: 'magazines' }" class="link">
+                        <div class="icon fa fa-file-pdf-o fa-5x"></div>
+                        <div class="icon-text">Magazines</div>
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -34,28 +36,16 @@
 <style lang="scss" scoped>
     @import '../css/settings.scss';
 
-    $blue: get-color(blue);
     $gray: get-color(gray);
 
-    .tiles {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        & > div {
-            margin: 0 $global-margin $global-margin;
-            flex-grow: 1;
-
-            a {
-                display: block;
-                text-align: center;
-            }
-        }
+    .tile {
+        margin-bottom: rem-calc(20);
+        text-align: center;
     }
 
     .link {
-        color: $blue;
         display: inline-block;
+        text-align: center;
     }
 
     .icon {
@@ -65,13 +55,13 @@
     }
 
     .icon-text {
-        margin: 0;
+        font-size: rem-calc(22);
         padding: rem-calc(5);
         text-align: center;
     }
 
     @include breakpoint(small only) {
-        .icon-text{
+        .icon-text {
             display: none;
         }
     }
