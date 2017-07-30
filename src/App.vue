@@ -19,7 +19,9 @@
 
     components: {appHeader},
 
-    mounted: function () {
+    beforeMount: function () {
+      require('./lib/foundation')();
+
       events.on('theme-change', (theme) => {
         this.theme = theme;
       });
