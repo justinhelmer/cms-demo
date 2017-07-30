@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import jQuery from 'jquery';
+  import $ from 'jquery';
 
   export default {
     name: 'video',
@@ -52,7 +52,7 @@
     watch: {
       // browser needs to reload the src of the video
       ['video.path']() {
-        jQuery(this.$el).find('video')[0].load();
+        $(this.$el).find('video')[0].load();
       }
     }
   }

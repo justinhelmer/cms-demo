@@ -18,14 +18,14 @@
 
 <script>
   import axios from 'axios';
-  import jQuery from 'jquery';
+  import $ from 'jquery';
   import events from '../../lib/global-events';
 
   export default {
     name: 'header',
 
     mounted: function () {
-      const $header = jQuery(this.$el);
+      const $header = $(this.$el);
       const $wrapper = $header.siblings('main');
       const navbarHeight = $header.outerHeight();
       let didScroll;

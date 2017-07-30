@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import jQuery from 'jquery';
+  import $ from 'jquery';
   import events from '../lib/global-events';
   import thumbnail from './shared/Thumbnail.vue';
 
@@ -48,7 +48,7 @@
 
     mounted: function () {
       const $vm = this;
-      const $el = jQuery(this.$el);
+      const $el = $(this.$el);
       const $pager = $el.find('.pager');
 
       events.on('content-scroll', function (event) {
