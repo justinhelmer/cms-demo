@@ -1,15 +1,12 @@
 <template>
     <div id="app">
-        <appHeader :theme="theme"></appHeader>
+        <appHeader></appHeader>
         <main><router-view></router-view></main>
     </div>
 </template>
 
 <script>
   import appHeader from './components/global/Header.vue';
-  import moment from 'moment';
-
-  const currentHour = moment().hour();
 
   export default {
     name: 'app',
@@ -18,14 +15,8 @@
 
     beforeMount: function () {
       require('./lib/foundation')({
-        plugins: ['Sticky']
+        plugins: ['Sticky', 'Toggler']
       });
-    },
-
-    data() {
-      return {
-        theme: (currentHour > 18 || currentHour < 8) ? 'dark' : 'light'
-      };
     }
   }
 </script>

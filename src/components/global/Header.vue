@@ -18,7 +18,7 @@
             <div class="top-bar-right">
                 <ul class="menu align-right">
                     <li>
-                        <a href="#" v-on:click="toggleTheme" onclick="return false;">
+                        <a href="#" data-toggle="body">
                             <i class="fa fa-lightbulb-o"></i><span class="show-for-medium">Change Theme</span>
                         </a>
                     </li>
@@ -34,8 +34,9 @@
 </template>
 
 <script>
-  import axios from 'axios';
   import $ from 'jquery';
+  import axios from 'axios';
+  import moment from 'moment';
 
   export default {
     name: 'header',
@@ -53,19 +54,15 @@
       });
 
       new Foundation.Sticky($nav);
-    },
+      const theme = new Foundation.Toggler($('body'));
 
-    data () {
-      return {
-        theme: this.$attrs.type
-      };
+      const currentHour = moment().hour();
+      if (currentHour > 18 || currentHour < 8) {
+        theme.toggle();
+      }
     },
 
     methods: {
-      toggleTheme: function () {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
-      },
-
       random: function () {
         axios
           .get('/api/random/video', {
