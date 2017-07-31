@@ -1,9 +1,7 @@
 <template>
-    <div id="app" :class="[theme, 'grid-y', 'grid-frame']">
+    <div id="app" :class="theme">
         <appHeader :theme="theme"></appHeader>
-        <main class="cell auto">
-            <router-view class="content"></router-view>
-        </main>
+        <main><router-view></router-view></main>
     </div>
 </template>
 
@@ -43,6 +41,8 @@
     @import 'ffab.scss';
 
     @include foundation-global-styles;
+    @include foundation-menu;
+    @include foundation-top-bar;
     @include foundation-xy-grid-classes;
     @include foundation-typography;
     @include foundation-button;
@@ -54,11 +54,14 @@
 
     $white: get-color(white);
     $black: get-color(black);
-    $header-height: rem-calc(55);
 
     ::-webkit-scrollbar {
         width: 0;
         background: transparent;
+    }
+
+    body {
+        -webkit-overflow-scrolling: touch;
     }
 
     #app {
@@ -71,14 +74,5 @@
                 color: $white;
             }
         }
-    }
-
-    main {
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .content {
-        margin-top: $header-height;
     }
 </style>

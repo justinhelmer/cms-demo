@@ -1,16 +1,33 @@
 <template>
     <header>
-        <nav class="nav">
-            <div>
-                <div>
-                    <router-link :to="{ name: 'home' }" class="fa fa-home fa-lg"></router-link>
-                </div>
-                <div><a href="#" class="fa fa-random fa-lg" v-on:click="random" onclick="return false;"></a></div>
+        <nav id="nav" class="nav sticky top-bar">
+            <div class="top-bar-left">
+                <ul class="menu">
+                    <li>
+                        <router-link :to="{ name: 'home' }">
+                            <i class="fa fa-home"></i><span class="show-for-medium">Home</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <a href="#" v-on:click="random" onclick="return false;">
+                            <i class="fa fa-random"></i><span class="show-for-medium">Random Video</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div>
-                <div><a href="#" class="fa fa-lightbulb-o fa-lg" v-on:click="toggleTheme" onclick="return false;"></a>
-                </div>
-                <div><a href="/keystone" class="fa fa-cog fa-lg"></a></div>
+            <div class="top-bar-right">
+                <ul class="menu align-right">
+                    <li>
+                        <a href="#" v-on:click="toggleTheme" onclick="return false;">
+                            <i class="fa fa-lightbulb-o"></i><span class="show-for-medium">Change Theme</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/keystone">
+                            <i class="fa fa-cog"></i><span class="show-for-medium">Admin Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -93,58 +110,23 @@
 <style lang="scss" scoped>
     @import '../../css/settings.scss';
 
-    $blue: get-color(blue);
+    $white: get-color(white);
     $header-height: rem-calc(55);
 
     header {
-        position: fixed;
-        transition: top 0.2s ease-in-out;
-        top: 0;
-        left: 0;
-        right: 0;
         height: $header-height;
         overflow: hidden;
-        z-index: 1;
 
-        &.nav-up {
-            top: -$header-height;
+        &.scroll-down {
+            border: red;
         }
-        .nav {
-            background: $blue;
-            display: flex;
-            justify-content: space-between;
+    }
 
-            & > div {
-                display: flex;
+    a {
+        color: $white;
+    }
 
-                & > div {
-                    position: relative;
-
-                    &::before {
-                        transform: translate(0, -50%);
-                        background-color: rgba(255, 255, 255, 0.2);
-                        content: " ";
-                        left: 0;
-                        height: 1em;
-                        position: absolute;
-                        top: 50%;
-                        width: 1px;
-                        z-index: 1;
-                    }
-
-                    &::first-child::before {
-                        display: none;
-                    }
-                }
-            }
-
-            & a {
-                box-sizing: content-box;
-                color: #fff;
-                height: 15px;
-                display: inline-block;
-                padding: $global-margin;
-            }
-        }
+    i {
+        margin-right: rem-calc(5);
     }
 </style>
