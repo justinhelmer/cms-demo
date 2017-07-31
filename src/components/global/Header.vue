@@ -1,6 +1,6 @@
 <template>
-    <header>
-        <nav id="nav" class="nav sticky top-bar">
+    <header data-sticky-container>
+        <nav id="nav" class="nav sticky top-bar" data-sticky data-margin-top="0">
             <div class="top-bar-left">
                 <ul class="menu">
                     <li>
@@ -36,20 +36,23 @@
 <script>
   import axios from 'axios';
   import $ from 'jquery';
-  import events from '../../lib/global-events';
-  import scroll from '../../lib/scroll';
 
   export default {
     name: 'header',
 
     mounted: function () {
-      const $header = $(this.$el);
+      const Foundation = require('foundation-sites/js/foundation.core').Foundation;
+      const $window = $(window);
+      const $nav = $(this.$el).find('nav.sticky');
+      let previousScrollTop = 0;
 
-      scroll.on('down', () => {
-        $header.removeClass('scroll-up').addClass('scroll-down');
+      $window.on('scroll', () => {
+        const scrollTop = $window.scrollTop();
+        $nav.toggleClass('hidden', scrollTop > previousScrollTop);
+        previousScrollTop = scrollTop;
       });
 
-      scroll.on('up', () => $header.removeClass('scroll-down').addClass('scroll-up'));
+      new Foundation.Sticky($nav);
     },
 
     data () {
@@ -61,7 +64,6 @@
     methods: {
       toggleTheme: function () {
         this.theme = this.theme === 'light' ? 'dark' : 'light';
-        events.trigger('theme-change', this.theme);
       },
 
       random: function () {
@@ -85,22 +87,15 @@
     @import '../../css/settings.scss';
 
     $white: get-color(white);
-    $header-height: rem-calc(55);
 
-    header {
-        height: $header-height;
-        overflow: hidden;
+    nav.sticky {
+        transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
 
-        &.scroll-down {
-            border: red;
+        &.hidden {
+            transform: translateY(-100%);
         }
     }
 
-    a {
-        color: $white;
-    }
-
-    i {
-        margin-right: rem-calc(5);
-    }
+    a {  color: $white;  }
+    i {  margin-right: rem-calc(5); }
 </style>

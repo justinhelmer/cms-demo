@@ -1,5 +1,5 @@
 <template>
-    <div id="app" :class="theme">
+    <div id="app">
         <appHeader :theme="theme"></appHeader>
         <main><router-view></router-view></main>
     </div>
@@ -7,7 +7,6 @@
 
 <script>
   import appHeader from './components/global/Header.vue';
-  import events from './lib/global-events';
   import moment from 'moment';
 
   const currentHour = moment().hour();
@@ -18,10 +17,8 @@
     components: {appHeader},
 
     beforeMount: function () {
-      require('./lib/foundation')();
-
-      events.on('theme-change', (theme) => {
-        this.theme = theme;
+      require('./lib/foundation')({
+        plugins: ['Sticky']
       });
     },
 
@@ -42,6 +39,7 @@
 
     @include foundation-global-styles;
     @include foundation-menu;
+    @include foundation-sticky;
     @include foundation-top-bar;
     @include foundation-xy-grid-classes;
     @include foundation-typography;
@@ -62,9 +60,6 @@
 
     body {
         -webkit-overflow-scrolling: touch;
-    }
-
-    #app {
         background-color: $white;
 
         &.dark {

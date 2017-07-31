@@ -8,29 +8,31 @@
             </div>
         </div>
 
-        <div class="pager">
-            <div class="grid-container grid-container-padded">
-                <ul class="align-center">
-                    <li v-if="videos.previous" class="auto cell">
-                        <router-link :to="{
-                          name: 'videos',
-                          params: (videos.previous === 1) ? {} : { page: videos.previous }
-                        }">prev
-                        </router-link>
-                    </li>
+        <div data-sticky-container>
+            <div class="pager sticky" data-sticky data-stick-to="bottom" data-margin-bottom="0">
+                <div class="grid-container grid-container-padded">
+                    <ul class="align-center">
+                        <li v-if="videos.previous" class="auto cell">
+                            <router-link :to="{
+                              name: 'videos',
+                              params: (videos.previous === 1) ? {} : { page: videos.previous }
+                            }">prev
+                            </router-link>
+                        </li>
 
-                    <li v-for="page in videos.pages" class="auto cell">
-                        <div v-if="page === '...'">...</div>
-                        <router-link
-                                v-if="page !== '...'"
-                                :to="{ name: 'videos', params: (page === 1) ? {} : { page }}">{{page}}
-                        </router-link>
-                    </li>
+                        <li v-for="page in videos.pages" class="auto cell">
+                            <div v-if="page === '...'">...</div>
+                            <router-link
+                                    v-if="page !== '...'"
+                                    :to="{ name: 'videos', params: (page === 1) ? {} : { page }}">{{page}}
+                            </router-link>
+                        </li>
 
-                    <li v-if="videos.next" class="auto cell">
-                        <router-link :to="{ name: 'videos', params: { page: videos.next }}">next</router-link>
-                    </li>
-                </ul>
+                        <li v-if="videos.next" class="auto cell">
+                            <router-link :to="{ name: 'videos', params: { page: videos.next }}">next</router-link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -38,7 +40,6 @@
 
 <script>
   import $ from 'jquery';
-  import scroll from '../lib/scroll';
   import thumbnail from './shared/Thumbnail.vue';
 
   export default {
@@ -47,19 +48,33 @@
     components: {thumbnail},
 
     mounted: function () {
-      const $pager = $(this.$el).find('.pager');
+      const Foundation = require('foundation-sites/js/foundation.core').Foundation;
+      this.pager = new Foundation.Sticky($(this.$el).find('.pager.sticky'));
 
-      scroll.on('down', function ({isBottom}) {
-        if (isBottom) {
-          $pager.addClass('scroll-up').removeClass('scroll-down');
-        } else {
-          $pager.addClass('scroll-down').removeClass('scroll-up');
-        }
-      });
+      // sticky uses $(window).one() which doesn't play nice when this route is loaded via the client router.
+      // @see https://github.com/zurb/foundation-sites/issues/9047
+      $(window).trigger('load.zf.sticky');
+      this.pager._calc(true);
 
-      scroll.on('up', function () {
-        $pager.addClass('scroll-up').removeClass('scroll-down');
-      });
+      $(window).on('scroll', this.togglePagerVisibility);
+    },
+
+    destroyed: function() {
+      this.pager.destroy();
+      $(window).off('scroll', this.togglePagerVisibility);
+    },
+
+    methods: {
+      togglePagerVisibility: function() {
+        const $pager = $(this.$el).find('.pager');
+        const $window = $(window);
+
+        const scrollTop = $window.scrollTop();
+        const isBottom = $window.height() + scrollTop === $(document).height();
+
+        $pager.toggleClass('hidden', (isBottom) ? (false) : (scrollTop > this.prevScrollTop));
+        this.prevScrollTop = scrollTop;
+      }
     },
 
     asyncData({store, route}) {
@@ -98,14 +113,10 @@
 
     .pager {
         background: $black;
-        position: fixed;
-        transition: bottom 0.2s ease-in-out;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
 
-        &.scroll-down {
-            bottom: -$pager-height;
+        &.hidden {
+            transform: translateY(100%);
         }
 
         ul {
