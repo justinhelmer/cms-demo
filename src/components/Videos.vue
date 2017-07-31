@@ -47,16 +47,13 @@
 
     components: {thumbnail},
 
-    mounted: function () {
-      const Foundation = require('foundation-sites/js/foundation.core').Foundation;
-      this.pager = new Foundation.Sticky($(this.$el).find('.pager.sticky'));
-
-      // sticky uses $(window).one() which doesn't play nice when this route is loaded via the client router.
-      // @see https://github.com/zurb/foundation-sites/issues/9047
-      $(window).trigger('load.zf.sticky');
-      this.pager._calc(true);
-
+    mounted: function() {
       $(window).on('scroll', this.togglePagerVisibility);
+      this.foundation();
+    },
+
+    updated: function () {
+      this.foundation(true);
     },
 
     destroyed: function() {
@@ -65,6 +62,22 @@
     },
 
     methods: {
+      foundation: function(update) {
+        const Foundation = require('foundation-sites/js/foundation.core').Foundation;
+        const $pager = $(this.$el).find('.pager');
+
+        if (update) {
+          Foundation.reInit($pager);
+        } else {
+          this.pager = new Foundation.Sticky($pager);
+        }
+
+        // sticky uses $(window).one() which doesn't play nice when this route is loaded via the client router.
+        // @see https://github.com/zurb/foundation-sites/issues/9047
+        $(window).trigger('load.zf.sticky');
+        this.pager._calc(true);
+      },
+
       togglePagerVisibility: function() {
         const $pager = $(this.$el).find('.pager');
         const $window = $(window);
