@@ -7,19 +7,19 @@
                 <div class="tile medium-4 cell">
                     <router-link :to="{ name: 'videos' }" class="link">
                         <div class="icon fa fa-video-camera fa-5x"></div>
-                        <div class="icon-text">Videos</div>
+                        <div class="icon-text show-for-medium">Videos</div>
                     </router-link>
                 </div>
                 <div class="tile medium-4 cell">
                     <router-link :to="{ name: 'photos' }" class="link">
                         <div class="icon fa fa-camera fa-5x"></div>
-                        <div class="icon-text">Photos</div>
+                        <div class="icon-text show-for-medium">Photos</div>
                     </router-link>
                 </div>
                 <div class="tile medium-4 cell">
                     <router-link :to="{ name: 'magazines' }" class="link">
                         <div class="icon fa fa-file-pdf-o fa-5x"></div>
-                        <div class="icon-text">Magazines</div>
+                        <div class="icon-text show-for-medium">Magazines</div>
                     </router-link>
                 </div>
             </div>
@@ -58,11 +58,5 @@
         font-size: rem-calc(22);
         padding: rem-calc(5);
         text-align: center;
-    }
-
-    @include breakpoint(small only) {
-        .icon-text {
-            display: none;
-        }
     }
 </style>
