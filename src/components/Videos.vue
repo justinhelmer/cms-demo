@@ -38,7 +38,7 @@
 
 <script>
   import $ from 'jquery';
-  import events from '../lib/global-events';
+  import scroll from '../lib/scroll';
   import thumbnail from './shared/Thumbnail.vue';
 
   export default {
@@ -47,16 +47,14 @@
     components: {thumbnail},
 
     mounted: function () {
-      const $vm = this;
-      const $el = $(this.$el);
-      const $pager = $el.find('.pager');
+      const $pager = $(this.$el).find('.pager');
 
-      events.on('content-scroll', function (event) {
-        const bottom = event.scrollPos + event.documentHeight === event.scrollHeight;
-        const direction = bottom ? 'up' : event.direction;
-        const opposite = direction === 'up' ? 'down' : 'up';
+      scroll.on('down', function ({scrollTop, documentHeight}) {
+        $pager.addClass('scroll-down').removeClass('scroll-up');
+      });
 
-        $pager.addClass('nav-' + opposite).removeClass('nav-' + direction);
+      scroll.on('up', function () {
+        $pager.addClass('scroll-up').removeClass('scroll-down');
       });
     },
 
@@ -102,12 +100,8 @@
         left: 0;
         right: 0;
 
-        &.nav-up {
+        &.scroll-down {
             bottom: -$pager-height;
-        }
-
-        &.nav-down {
-            bottom: 0;
         }
 
         ul {

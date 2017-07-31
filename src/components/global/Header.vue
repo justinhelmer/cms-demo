@@ -37,45 +37,19 @@
   import axios from 'axios';
   import $ from 'jquery';
   import events from '../../lib/global-events';
+  import scroll from '../../lib/scroll';
 
   export default {
     name: 'header',
 
     mounted: function () {
       const $header = $(this.$el);
-      const $wrapper = $header.siblings('main');
-      const navbarHeight = $header.outerHeight();
-      let didScroll;
-      let lastScrollPos = 0;
 
-      $wrapper.on('scroll', () => {
-        didScroll = true;
+      scroll.on('down', () => {
+        $header.removeClass('scroll-up').addClass('scroll-down');
       });
 
-      setInterval(() => {
-        if (didScroll) {
-          hasScrolled();
-          didScroll = false;
-        }
-      }, 250);
-
-      function hasScrolled() {
-        const scrollPos = $wrapper.scrollTop();
-        const documentHeight = $wrapper.height();
-        const scrollHeight = $wrapper[0].scrollHeight;
-
-        if (scrollPos > lastScrollPos && scrollPos > navbarHeight) {
-          // Scroll Down
-          $header.removeClass('nav-down').addClass('nav-up');
-          events.trigger('content-scroll', {direction: 'down', scrollPos, documentHeight, scrollHeight});
-        } else if (scrollPos < lastScrollPos) {
-          // Scroll Up
-          $header.removeClass('nav-up').addClass('nav-down');
-          events.trigger('content-scroll', {direction: 'up', scrollPos, documentHeight, scrollHeight});
-        }
-
-        lastScrollPos = scrollPos;
-      }
+      scroll.on('up', () => $header.removeClass('scroll-down').addClass('scroll-up'));
     },
 
     data () {
