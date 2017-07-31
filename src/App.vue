@@ -39,6 +39,7 @@
 
     @include foundation-global-styles;
     @include foundation-menu;
+    @include foundation-pagination;
     @include foundation-sticky;
     @include foundation-top-bar;
     @include foundation-xy-grid-classes;

@@ -10,29 +10,26 @@
 
         <div data-sticky-container>
             <div class="pager sticky" data-sticky data-stick-to="bottom" data-margin-bottom="0">
-                <div class="grid-container grid-container-padded">
-                    <ul class="align-center">
-                        <li v-if="videos.previous" class="auto cell">
-                            <router-link :to="{
-                              name: 'videos',
-                              params: (videos.previous === 1) ? {} : { page: videos.previous }
-                            }">prev
-                            </router-link>
-                        </li>
 
-                        <li v-for="page in videos.pages" class="auto cell">
-                            <div v-if="page === '...'">...</div>
-                            <router-link
-                                    v-if="page !== '...'"
-                                    :to="{ name: 'videos', params: (page === 1) ? {} : { page }}">{{page}}
-                            </router-link>
-                        </li>
+                <ul class="pagination text-center">
+                    <li v-if="videos.previous" class="pagination-previous">
+                        <router-link :to="{
+                          name: 'videos',
+                          params: (videos.previous === 1) ? {} : { page: videos.previous }
+                        }">prev
+                        </router-link>
+                    </li>
 
-                        <li v-if="videos.next" class="auto cell">
-                            <router-link :to="{ name: 'videos', params: { page: videos.next }}">next</router-link>
-                        </li>
-                    </ul>
-                </div>
+                    <router-link tag="li" v-for="page in videos.pages"
+                                 exact-active-class="current"
+                                 :to="{ name: 'videos', params: (page === 1) ? {} : { page }}">
+                        <a>{{page}}</a>
+                    </router-link>
+
+                    <li v-if="videos.next" class="pagination-next">
+                        <router-link :to="{ name: 'videos', params: { page: videos.next }}">next</router-link>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -114,11 +111,8 @@
     @custom-selector :--active .router-link-exact-active, :hover;
 
     $black: get-color(black);
-    $blue: get-color(blue);
     $gray: get-color(gray);
     $white: get-color(white);
-
-    $pager-height: 50px;
 
     .video {
         border: 1px solid $gray;
@@ -131,35 +125,13 @@
         &.hidden {
             transform: translateY(100%);
         }
+    }
 
-        ul {
-            @include xy-grid(horizontal, false);
-            margin: 0;
+    .pagination a {
+        color: $white;
 
-            li {
-                border-right: 1px solid $gray;
-                color: $white;
-                list-style-type: none;
-                text-align: center;
-                height: $pager-height;
-                line-height: $pager-height;
-
-                &:last-child {
-                    border-right: 0 none;
-                }
-
-                a {
-                    color: $white;
-                    display: block;
-                    padding: 0 rem-calc(20);
-
-                    &:--active {
-                        background: $blue;
-                        color: $white;
-                        font-weight: bold;
-                    }
-                }
-            }
+        &:hover {
+            background: none;
         }
     }
 </style>
