@@ -49,8 +49,12 @@
     mounted: function () {
       const $pager = $(this.$el).find('.pager');
 
-      scroll.on('down', function ({scrollTop, documentHeight}) {
-        $pager.addClass('scroll-down').removeClass('scroll-up');
+      scroll.on('down', function ({isBottom}) {
+        if (isBottom) {
+          $pager.addClass('scroll-up').removeClass('scroll-down');
+        } else {
+          $pager.addClass('scroll-down').removeClass('scroll-up');
+        }
       });
 
       scroll.on('up', function () {

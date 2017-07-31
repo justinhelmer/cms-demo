@@ -20,12 +20,11 @@ module.exports = {
 
     function hasScrolled() {
       const scrollTop = $wrapper.scrollTop();
-      const documentHeight = $wrapper.height();
 
       if (scrollTop > lastScrollPos) {
-        events.trigger('scroll.down', {scrollTop, documentHeight});
+        events.trigger('scroll.down', { isBottom: $(window).height() + scrollTop === $wrapper.height() });
       } else if (scrollTop < lastScrollPos) {
-        events.trigger('scroll.up', {scrollTop, documentHeight});
+        events.trigger('scroll.up', { isTop: scrollTop === 0 });
       }
 
       lastScrollPos = scrollTop;
