@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const compression = require('compression');
 const express = require('express');
 const path = require('path');
@@ -16,7 +17,12 @@ module.exports = app => {
   app.use(config.thumbsPath, serve(config.thumbsPath, true));
 
   Object.keys(config.assetPaths).forEach(list => {
-    config.assetPaths[list].forEach(assetPath => {
+    let assetPaths = config.assetPaths[list];
+    if (!_.isArray(assetPaths)) {
+      assetPaths = [assetPaths];
+    }
+
+    assetPaths.forEach(assetPath => {
       app.use(assetPath, serve(assetPath, true));
     });
   });

@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const fs = require('fs-extra');
 const keystone = require('keystone');
 const path = require('path');
@@ -20,7 +21,12 @@ module.exports = done => {
   };
 
   function updateList(type) {
-    const assetPaths = config.assetPaths[type];
+    let assetPaths = config.assetPaths[type];
+
+    if (!_.isArray(assetPaths)) {
+      assetPaths = [assetPaths];
+    }
+
     const List = keystone.list(type);
     let promises = [];
 
