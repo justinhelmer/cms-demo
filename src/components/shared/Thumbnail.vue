@@ -13,7 +13,7 @@
       fullpath () {
         return path.join(
           thumbsPath,
-          this.$attrs.type,
+          this.$attrs.endpoint,
           this.$attrs.list.name,
           this.$attrs.list.thumbs[this.$attrs.at]
         );
