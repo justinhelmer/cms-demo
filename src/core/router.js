@@ -29,9 +29,14 @@ export function createRouter () {
         component: () => import('../components/Photos.vue')
       },
       {
-        name: 'magazines',
-        path: '/magazines',
-        component: () => import('../components/Magazines.vue')
+        name: 'actors',
+        path: '/actors/:page?',
+        component: () => import('../components/Actors.vue')
+      },
+      {
+        name: 'actor',
+        path: '/actor/:id',
+        component: () => import('../components/Actor.vue')
       },
       {
         name: 'videos',

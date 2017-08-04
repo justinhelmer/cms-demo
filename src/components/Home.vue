@@ -17,9 +17,9 @@
                     </router-link>
                 </div>
                 <div class="tile medium-4 cell">
-                    <router-link :to="{ name: 'magazines' }" class="link">
-                        <div class="icon fa fa-file-pdf-o fa-5x"></div>
-                        <div class="icon-text show-for-medium">Magazines</div>
+                    <router-link :to="{ name: 'actors' }" class="link">
+                        <div class="icon fa fa-female fa-5x"></div>
+                        <div class="icon-text show-for-medium">Actors</div>
                     </router-link>
                 </div>
             </div>

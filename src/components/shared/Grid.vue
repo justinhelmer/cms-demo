@@ -3,7 +3,7 @@
         <div class="grid-x">
             <div v-for="item in $attrs.items.results" class="medium-6 large-4 xlarge-3 xxlarge-2 cell">
                 <router-link :to="{ name: $attrs.endpoint, params: { id: item._id }}">
-                    <thumbnail :list="item" :endpoint="$attrs.endpoint" at="0"></thumbnail>
+                    <thumbnail :list="item" :endpoint="$attrs.endpoint" :show-name="$attrs['show-name']" at="0"></thumbnail>
                 </router-link>
             </div>
         </div>
@@ -91,15 +91,13 @@
 
 <style lang="scss">
     @import '../../css/settings.scss';
-    @import 'xy-grid/xy-grid.scss';
     @custom-selector :--active .router-link-exact-active, :hover;
 
     $black: get-color(black);
-    $gray: get-color(gray);
     $white: get-color(white);
 
-    .content-grid .cell {
-        border: 1px solid $gray;
+    .content-grid .cell a {
+      width: 100%;
     }
 
     .pager {

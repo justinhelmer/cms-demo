@@ -27,7 +27,9 @@ module.exports = app => {
     if (req.params.id) {
       query = List.model.findById(req.params.id);
     } else {
-      query = List.paginate(Object.assign({ page: req.query.page || 1 }, opts[req.locals.userAgent]));
+      query = List
+        .paginate(Object.assign({ page: req.query.page || 1 }, opts[req.locals.userAgent]))
+        .sort('name');
     }
 
     query.exec((err, result) => responseHandler(req, res, err, result));

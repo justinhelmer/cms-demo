@@ -1,5 +1,8 @@
 <template>
-    <img :src="fullpath" />
+    <div class="thumb">
+      <img :src="fullpath" />
+      <div v-if="$attrs['show-name']">{{$attrs.list.name}}</div>
+    </div>
 </template>
 
 <script>
@@ -21,3 +24,31 @@
     }
   }
 </script>
+
+<style lang="scss">
+    @import '../../css/settings.scss';
+
+    $gray: get-color(gray);
+    $black: get-color(black);
+    $white: get-color(white);
+
+    .thumb {
+        border: 1px solid $gray;
+        position: relative;
+
+        img {
+          display: block;
+          width: 100%;
+        }
+
+        div {
+          background-color: $black;
+          bottom: 0;
+          color: $white;
+          padding: rem-calc(5);
+          position: absolute;
+          text-align: center;
+          width: 100%;
+        }
+    }
+</style>
