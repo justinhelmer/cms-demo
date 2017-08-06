@@ -40,9 +40,9 @@ export function createStore ({ userAgent }) {
     },
     mutations: {
       setItem (state, { store, id, data }) {
-        const idx = state[store].results.find(item => item.id === id);
+        const idx = state[store].results.findIndex(item => item._id === id);
 
-        if (idx) {
+        if (idx > -1) {
           state[store].results[idx] = data;
         } else {
           state[store].results.push(data);
