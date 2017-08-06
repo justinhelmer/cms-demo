@@ -1,6 +1,6 @@
 <template>
     <div id="videos">
-        <grid :items="videos" store="videos" endpoint="video" :no-pager="true"></grid>
+        <grid :items="videos" store="videos" endpoint="video"></grid>
     </div>
 </template>
 
