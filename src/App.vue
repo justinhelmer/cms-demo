@@ -15,7 +15,7 @@
 
     beforeMount: function () {
       require('./lib/foundation')({
-        plugins: ['Sticky', 'Toggler']
+        plugins: ['Orbit', 'Sticky', 'Toggler']
       });
     }
   }
@@ -38,6 +38,7 @@
     @include foundation-button;
     @include foundation-visibility-classes;
     @include foundation-flex-classes;
+    @include foundation-orbit;
     @include motion-ui-transitions;
     @include motion-ui-animations;
     @include ffab-everything;
