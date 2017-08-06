@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <div data-sticky-container>
+        <div v-if="!$attrs['no-pager']" data-sticky-container>
             <div class="pager sticky" data-sticky data-stick-to="bottom" data-margin-bottom="0">
 
                 <ul class="pagination text-center">
