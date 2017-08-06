@@ -36,7 +36,6 @@
 <script>
   import $ from 'jquery';
   import axios from 'axios';
-  import moment from 'moment';
 
   export default {
     name: 'header',
@@ -56,7 +55,7 @@
       new Foundation.Sticky($nav);
       const theme = new Foundation.Toggler($('body'));
 
-      const currentHour = moment().hour();
+      const currentHour = (new Date()).getHours();
       if (currentHour > 18 || currentHour < 8) {
         theme.toggle();
       }
