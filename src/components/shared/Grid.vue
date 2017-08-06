@@ -20,7 +20,8 @@
                         </router-link>
                     </li>
 
-                    <router-link tag="li" v-for="page in $attrs.items.pages"
+                    <router-link tag="li" v-for="(page, index) in $attrs.items.pages"
+                                 :key="index"
                                  exact-active-class="current"
                                  :to="{ name: $attrs.store, params: (page === 1) ? {} : { page }}">
                         <a>{{page}}</a>
