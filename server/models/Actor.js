@@ -5,7 +5,8 @@ const Actor = new keystone.List('actor');
  
 Actor.add({
   name: { type: Types.Text, initial: true, required: true, index: true },
-  thumbs: { type: Types.Text, nodedit: true }
+  thumbs: { type: Types.Text, nodedit: true },
+  videos: { type: Types.Relationship, ref: 'video', many: true }
 });
 
 Actor.schema.set('toJSON', {

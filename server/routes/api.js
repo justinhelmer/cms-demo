@@ -25,7 +25,7 @@ module.exports = app => {
     };
 
     if (req.params.id) {
-      query = List.model.findById(req.params.id);
+      query = List.model.findById(req.params.id).populate('videos');
     } else {
       query = List
         .paginate(Object.assign({ page: req.query.page || 1 }, opts[req.locals.userAgent]))
