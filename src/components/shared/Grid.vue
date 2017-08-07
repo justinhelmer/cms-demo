@@ -38,12 +38,13 @@
 
 <script>
   import $ from 'jquery';
-  import thumbnail from './Thumbnail.vue';
 
   export default {
     name: 'grid',
 
-    components: {thumbnail},
+    components: {
+      thumbnail: () => import(/* webpackChunkName: "shared" */ './Thumbnail.vue')
+    },
 
     mounted: function() {
       $(window).on('scroll', this.togglePagerVisibility);

@@ -29,13 +29,14 @@
 
 <script>
   import $ from 'jquery';
-  import grid from './shared/Grid.vue';
-  import thumbnail from './shared/Thumbnail.vue';
 
   export default {
     name: 'actor',
 
-    components: {grid, thumbnail},
+    components: {
+      grid: () => import(/* webpackChunkName: "shared" */ './shared/Grid.vue'),
+      thumbnail: () => import(/* webpackChunkName: "shared" */ './shared/Thumbnail.vue')
+    },
 
     mounted: function () {
       const Foundation = require('foundation-sites/js/foundation.core').Foundation;
@@ -53,10 +54,7 @@
 
     computed: {
       actor() {
-
-        let actor = this.$store.getters.getItemById(this.$route.params.id, 'actors');
-        console.log(actor);
-        return actor;
+        return this.$store.getters.getItemById(this.$route.params.id, 'actors');
       },
 
       editUrl() {

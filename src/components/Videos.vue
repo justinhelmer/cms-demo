@@ -5,12 +5,12 @@
 </template>
 
 <script>
-  import grid from './shared/Grid.vue';
-
   export default {
     name: 'videos',
 
-    components: {grid},
+    components: {
+      grid: () => import(/* webpackChunkName: "shared" */ './shared/Grid.vue')
+    },
 
     asyncData({store, route}) {
       return store.dispatch('fetch', {
