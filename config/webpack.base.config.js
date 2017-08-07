@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -48,7 +49,7 @@ var config = {
         filename: 'common.[chunkhash].css'
       })
     ]
-    : []
+    : [new BundleAnalyzerPlugin()]
 };
 
 module.exports = config;
